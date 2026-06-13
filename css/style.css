@@ -482,3 +482,89 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 6px 24px rgba(37,211,102,0.5);
 }
 .whatsapp-float svg { width: 28px; height: 28px; }
+
+/* ============================== */
+/* FAQ Section (GEO/AEO signal)   */
+/* ============================== */
+.faq-section {
+  padding: 80px 0;
+  background: var(--gray-50, #f9fafb);
+}
+.faq-list {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--gray-200, #e5e7eb);
+  border-radius: 12px;
+  padding: 0;
+  overflow: hidden;
+  transition: all 0.25s ease;
+}
+.faq-item:hover { border-color: var(--primary, #2563eb); box-shadow: 0 4px 14px rgba(37,99,235,0.08); }
+.faq-item[open] { border-color: var(--primary, #2563eb); box-shadow: 0 4px 18px rgba(37,99,235,0.12); }
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 22px;
+  font-weight: 600;
+  font-size: 17px;
+  color: var(--gray-900, #111827);
+  position: relative;
+  padding-right: 50px;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 20px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 24px;
+  font-weight: 300;
+  color: var(--primary, #2563eb);
+  transition: transform 0.25s ease;
+}
+.faq-item[open] summary::after { content: "−"; }
+.faq-item p {
+  padding: 0 22px 20px 22px;
+  margin: 0;
+  color: var(--gray-700, #374151);
+  font-size: 15px;
+  line-height: 1.7;
+  border-top: 1px solid var(--gray-100, #f3f4f6);
+  padding-top: 16px;
+}
+@media (max-width: 768px) {
+  .faq-item summary { font-size: 15px; padding: 14px 18px; padding-right: 44px; }
+  .faq-item p { font-size: 14px; padding: 14px 18px 16px 18px; }
+}
+
+/* ============================== */
+/* Language Switcher (in nav)     */
+/* ============================== */
+.lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 12px;
+  font-size: 13px;
+  color: var(--gray-700);
+}
+.lang-switcher a {
+  color: var(--gray-700);
+  text-decoration: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+.lang-switcher a:hover,
+.lang-switcher a.active {
+  color: var(--primary);
+  background: var(--gray-100);
+}
+.lang-switcher .sep { color: var(--gray-300); }

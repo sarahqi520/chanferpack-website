@@ -8,7 +8,13 @@ Sitemap: https://www.chanferpack.com/sitemap.xml
 User-agent: GPTBot
 Allow: /
 
+User-agent: ChatGPT-User
+Allow: /
+
 User-agent: Claude
+Allow: /
+
+User-agent: Claude-Web
 Allow: /
 
 User-agent: CCBot
@@ -16,3 +22,19 @@ Allow: /
 
 User-agent: OAI-SearchBot
 Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Block common scrapers / AI training data harvesters we don't want
+User-agent: Bytespider
+Disallow: /
+
+User-agent: ImagesiftBot
+Disallow: /
