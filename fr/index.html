@@ -66,20 +66,15 @@
         <a href="../guides/" data-fr="Guides" data-en="Guides">Guides</a>
         <a href="../about.html" data-fr="À propos" data-en="About">À propos</a>
         <a href="../contact.html" data-fr="Contact" data-en="Contact">Contact</a>
-        <div class="lang-switcher">
-          <a href="../">EN</a>
-          <span class="sep">|</span>
-          <a href="../zh/">中</a>
-          <span class="sep">|</span>
-          <a href="../es/">ES</a>
-          <span class="sep">|</span>
-          <a href="../ar/">AR</a>
-          <span class="sep">|</span>
-          <a href="../pt/">PT</a>
-          <span class="sep">|</span>
-          <a href="fr/" class="active">FR</a>
-        </div>
-      </nav>
+</nav>
+      <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Language">
+          <option value="../"">EN</option>
+          <option value="../zh/"">中文</option>
+          <option value="../es/"">ES</option>
+          <option value="../ar/"">AR</option>
+          <option value="../pt/"">PT</option>
+          <option value="./" selected">FR</option>
+</select>
     </div>
   </header>
 

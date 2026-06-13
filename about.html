@@ -65,7 +65,17 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <header class="navbar"><div class="nav-container"><a href="index.html" class="logo"><img src="images/logo.svg" alt="CHANFER" height="44" style="height:44px; width:auto;"></a><nav class="nav-menu" id="navMenu"><div class="nav-dropdown"><a href="solutions/index.html" class="nav-link">Solutions ▾</a><div class="dropdown-menu"><a href="solutions/bottle-line.html">🧴 Bottle Line</a><a href="solutions/pouch-line.html">📦 Pouch Line</a><a href="solutions/drum-line.html">🛢️ Drum Line</a></div></div><a href="industries/index.html" class="nav-link">Industries</a><a href="equipment/index.html" class="nav-link">Equipment</a><a href="projects/index.html" class="nav-link">Global Projects</a><a href="guides/index.html" class="nav-link">Guides</a><a href="about.html" class="nav-link">About</a></nav><div class="nav-right"><button class="lang-toggle" onclick="toggleLang()">🌐 EN/中</button><a href="contact.html" class="btn-nav-cta">Get Quote →</a><button class="hamburger" onclick="toggleMenu()">☰</button></div></div></header>
+  <header class="navbar"><div class="nav-container"><a href="index.html" class="logo"><img src="images/logo.svg" alt="CHANFER" height="44" style="height:44px; width:auto;"></a><nav class="nav-menu" id="navMenu"><div class="nav-dropdown"><a href="solutions/index.html" class="nav-link">Solutions ▾</a><div class="dropdown-menu"><a href="solutions/bottle-line.html">🧴 Bottle Line</a><a href="solutions/pouch-line.html">📦 Pouch Line</a><a href="solutions/drum-line.html">🛢️ Drum Line</a></div></div><a href="industries/index.html" class="nav-link">Industries</a><a href="equipment/index.html" class="nav-link">Equipment</a><a href="projects/index.html" class="nav-link">Global Projects</a><a href="guides/index.html" class="nav-link">Guides</a><a href="about.html" class="nav-link">About</a></nav><div class="nav-right">
+        <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Select Language">
+          <option value="index.html" selected>🌐 EN</option>
+          <option value="zh/">🌐 中文</option>
+          <option value="es/">🌐 ES</option>
+          <option value="ar/">🌐 AR</option>
+          <option value="pt/">🌐 PT</option>
+          <option value="fr/">🌐 FR</option>
+</select>
+      
+<a href="contact.html" class="btn-nav-cta">Get Quote →</a><button class="hamburger" onclick="toggleMenu()">☰</button></div></div></header>
 
   <section class="page-hero">
     <div class="page-hero-bg"></div>

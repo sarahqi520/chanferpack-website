@@ -133,8 +133,16 @@
         <a href="../about.html" class="nav-link">About</a>
       </nav>
       <div class="nav-right">
-        <button class="lang-toggle" onclick="toggleLang()">🌐 EN/中</button>
-        <a href="../contact.html" class="btn-nav-cta">Get Quote →</a>
+        <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Select Language">
+          <option value="../index.html" selected>🌐 EN</option>
+          <option value="../zh/">🌐 中文</option>
+          <option value="../es/">🌐 ES</option>
+          <option value="../ar/">🌐 AR</option>
+          <option value="../pt/">🌐 PT</option>
+          <option value="../fr/">🌐 FR</option>
+</select>
+      
+<a href="../contact.html" class="btn-nav-cta">Get Quote →</a>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
       </div>
     </div>

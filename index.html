@@ -159,20 +159,14 @@
       </nav>
 
       <div class="nav-right">
-        <div class="lang-switcher" style="margin-left:0;">
-          <a href="/" class="active" title="English">EN</a>
-          <span class="sep">|</span>
-          <a href="zh/" title="中文">中</a>
-          <span class="sep">|</span>
-          <a href="es/" title="Español">ES</a>
-          <span class="sep">|</span>
-          <a href="ar/" title="العربية">AR</a>
-          <span class="sep">|</span>
-          <a href="pt/" title="Português">PT</a>
-          <span class="sep">|</span>
-          <a href="fr/" title="Français">FR</a>
-        </div>
-        <button class="lang-toggle" onclick="toggleLang()" title="English / 中文">🌐 EN/中</button>
+        <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Select Language">
+          <option value="/" selected>🌐 EN</option>
+          <option value="/zh/">🌐 中文</option>
+          <option value="/es/">🌐 ES</option>
+          <option value="/ar/">🌐 AR</option>
+          <option value="/pt/">🌐 PT</option>
+          <option value="/fr/">🌐 FR</option>
+        </select>
         <a href="contact.html" class="btn-nav-cta">Get Quote →</a>
         <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
       </div>

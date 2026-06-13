@@ -63,10 +63,6 @@ img { max-width: 100%; display: block; }
 .dropdown-menu a:hover { background: var(--gray-100); color: var(--primary); }
 
 .nav-right { display: flex; align-items: center; gap: 12px; }
-.lang-toggle {
-  font-size: 13px; padding: 6px 12px; border: 1px solid var(--gray-200);
-  border-radius: 20px; background: transparent; cursor: pointer; color: var(--gray-700);
-}
 .btn-nav-cta { background: var(--primary); color: var(--white); padding: 8px 20px; border-radius: 20px; font-size: 14px; font-weight: 600; }
 .btn-nav-cta:hover { background: var(--primary-dark); }
 .hamburger { display: none; background: none; border: none; font-size: 24px; cursor: pointer; }
@@ -544,27 +540,31 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================== */
-/* Language Switcher (in nav)     */
+/* Language Dropdown (in nav)       */
 /* ============================== */
-.lang-switcher {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-left: 12px;
+.lang-dropdown {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7280'/%3E%3C/svg%3E") no-repeat right 10px center / 10px;
+  background-color: #fff;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 7px 30px 7px 12px;
   font-size: 13px;
+  font-weight: 600;
   color: var(--gray-700);
-}
-.lang-switcher a {
-  color: var(--gray-700);
-  text-decoration: none;
-  padding: 4px 8px;
-  border-radius: 4px;
+  cursor: pointer;
   transition: all 0.2s;
-  font-weight: 500;
+  line-height: 1.4;
+  min-width: 100px;
 }
-.lang-switcher a:hover,
-.lang-switcher a.active {
+.lang-dropdown:hover {
+  border-color: var(--primary);
   color: var(--primary);
-  background: var(--gray-100);
 }
-.lang-switcher .sep { color: var(--gray-300); }
+.lang-dropdown:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.15);
+}

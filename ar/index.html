@@ -67,20 +67,15 @@
         <a href="../guides/" data-ar="الأدلة" data-en="Guides">الأدلة</a>
         <a href="../about.html" data-ar="من نحن" data-en="About">من نحن</a>
         <a href="../contact.html" data-ar="اتصل بنا" data-en="Contact">اتصل بنا</a>
-        <div class="lang-switcher">
-          <a href="../">EN</a>
-          <span class="sep">|</span>
-          <a href="../zh/">中</a>
-          <span class="sep">|</span>
-          <a href="../es/">ES</a>
-          <span class="sep">|</span>
-          <a href="ar/" class="active">AR</a>
-          <span class="sep">|</span>
-          <a href="../pt/">PT</a>
-          <span class="sep">|</span>
-          <a href="../fr/">FR</a>
-        </div>
-      </nav>
+</nav>
+      <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Language">
+          <option value="../"">EN</option>
+          <option value="../zh/"">中文</option>
+          <option value="../es/"">ES</option>
+          <option value="./" selected">AR</option>
+          <option value="../pt/"">PT</option>
+          <option value="../fr/"">FR</option>
+</select>
     </div>
   </header>
 
