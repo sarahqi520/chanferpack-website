@@ -1,0 +1,15 @@
+# Build output
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Local-only files
+.workbuddy/
+deploy-*.zip
+*.zip

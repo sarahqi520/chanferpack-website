@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://www.chanferpack.com/sitemap.xml
+
+# AI Bots - Full access
+User-agent: GPTBot
+Allow: /
+
+User-agent: Claude
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
