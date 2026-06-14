@@ -12,6 +12,43 @@
     <xhtml:link rel="alternate" hreflang="ar" href="https://www.chanferpack.com/ar/"/>
     <xhtml:link rel="alternate" hreflang="pt" href="https://www.chanferpack.com/pt/"/>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.chanferpack.com/fr/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://www.chanferpack.com/ru/"/>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/zh/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/es/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/ar/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/pt/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/fr/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/ru/</loc>
+    <lastmod>2026-06-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://www.chanferpack.com/solutions/</loc>
