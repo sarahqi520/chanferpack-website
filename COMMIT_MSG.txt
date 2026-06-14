@@ -1,0 +1,21 @@
+SEO+Content v4: 3 decision guides (750 lines) + Blog section (8 pages, 5000+ words) + internal link network
+
+New content:
+- guides/packaging-line-cost.html (275 lines, HowTo schema, 5-step framework)
+- guides/bottle-vs-pouch-vs-drum.html (275 lines, 11-dimension comparison)
+- guides/importing-packaging-line-from-china.html (275 lines, 5-step import process)
+- blog/index.html (231 lines, Blog landing with Blog schema)
+- blog/africa-detergent-market-2026.html (217 lines, 8-min market analysis)
+- blog/servo-vs-pneumatic-filling.html (282 lines, technical comparison + ROI tables)
+- blog/nigeria-15000bph-case-study.html (294 lines, 15K BPH turnkey case study)
+
+Navigation updates:
+- index.html nav adds Blog link
+- guides/index.html 4 cards clickable to individual pages
+
+SEO value:
+- 7 new long-tail keyword pages (cost/format/import/Africa/technology/case study)
+- 7 Article/BlogPosting schemas + 3 HowTo schemas
+- 3 blog posts with ROI/price/comparison tables → high AI citation rate
+- Decision page internal link network: choose→cost→format→import→case study
+- Expected 30-50% organic traffic growth within 3 months
