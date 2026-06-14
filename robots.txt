@@ -3,6 +3,7 @@ Allow: /
 
 # Sitemap
 Sitemap: https://www.chanferpack.com/sitemap.xml
+Sitemap: https://www.chanferpack.com/image-sitemap.xml
 
 # LLMs.txt - AI Citation Guide
 # Tells AI models (ChatGPT, Claude, Perplexity, etc.) how to cite this site

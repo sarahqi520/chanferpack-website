@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <!-- Homepage images -->
+  <url>
+    <loc>https://www.chanferpack.com/</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/detergent-filling-line-hero.webp</image:loc>
+      <image:caption>CHANFER Automatic Liquid Detergent Filling Line - Laundry Detergent Bottles Production Line</image:caption>
+      <image:title>CHANFER Hero Image - Liquid Detergent Packaging Line</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/factory-11180397.webp</image:loc>
+      <image:caption>CHANFER Factory - Liquid Detergent Packaging Line Manufacturer</image:caption>
+      <image:title>CHANFER Factory Guangzhou</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/printing-united-expo-2026.webp</image:loc>
+      <image:caption>CHANFER PRINTING United Expo 2026 Invitation - Booth N7411 North Halls</image:caption>
+      <image:title>CHANFER at PRINTING United Expo 2026</image:title>
+    </image:image>
+  </url>
+
+  <!-- Solutions pages -->
+  <url>
+    <loc>https://www.chanferpack.com/solutions/</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/bottle-line.webp</image:loc>
+      <image:caption>Bottle Liquid Detergent Packaging Line</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/pouch-line.webp</image:loc>
+      <image:caption>Pouch Liquid Detergent Packaging Line (Doypack)</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/drum-box-line.webp</image:loc>
+      <image:caption>Drum/Box Liquid Detergent Packaging Line</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.chanferpack.com/solutions/bottle-line.html</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/bottle-line.webp</image:loc>
+      <image:caption>Bottle Liquid Detergent Filling and Packaging Line</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.chanferpack.com/solutions/pouch-line.html</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/pouch-line.webp</image:loc>
+      <image:caption>Pouch (Doypack) Liquid Detergent Packaging Line</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.chanferpack.com/solutions/drum-line.html</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/drum-box-line.webp</image:loc>
+      <image:caption>Drum/Box Liquid Detergent Packaging Line</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Projects page -->
+  <url>
+    <loc>https://www.chanferpack.com/projects/</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/factory-11180397.webp</image:loc>
+      <image:caption>CHANFER Global Project Cases - 200+ Production Lines Installed</image:caption>
+    </image:image>
+  </url>
+
+  <!-- Equipment page -->
+  <url>
+    <loc>https://www.chanferpack.com/equipment/</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/bottle-line.webp</image:loc>
+      <image:caption>CHANFER Packaging Equipment - Filling, Capping, Labeling Machines</image:caption>
+    </image:image>
+  </url>
+
+  <!-- OG default image (shared across social) -->
+  <url>
+    <loc>https://www.chanferpack.com/og-default.jpg</loc>
+    <image:image>
+      <image:loc>https://www.chanferpack.com/images/og-default.jpg</image:loc>
+      <image:caption>CHANFER - Turnkey Liquid Detergent Packaging Line Manufacturer</image:caption>
+    </image:image>
+  </url>
+</urlset>
