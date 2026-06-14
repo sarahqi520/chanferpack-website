@@ -1,6 +1,3 @@
-User-agent: Baiduspider
-Allow: /
-
 User-agent: *
 Allow: /
 
