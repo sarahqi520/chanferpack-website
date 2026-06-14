@@ -160,3 +160,39 @@
 
   <footer class="footer"><div class="container"><div class="footer-bottom"><p>© 2025 CHANFER Intelligent Equipment Co., Ltd.</p></div></div></footer>
   <script src
+  <!-- GA4 Event Tracking -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // 1. Track "Get a Quote" / "Get Quote" button clicks
+    document.querySelectorAll('a[href*="contact.html"], .btn-primary[href*="contact"], .btn-primary-white[href*="contact"]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        gtag('event', 'quote_click', {
+          'page_location': window.location.pathname,
+          'link_text': btn.textContent.trim().substring(0, 50)
+        });
+      });
+    });
+
+    // 2. Track WhatsApp floating button clicks
+    document.querySelectorAll('a[href*="whatsapp"], a[href*="19128803719"]').forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        gtag('event', 'whatsapp_click', {
+          'page_location': window.location.pathname
+        });
+      });
+    });
+
+    // 3. Track language dropdown changes
+    var langDropdown = document.querySelector('.lang-dropdown');
+    if (langDropdown) {
+      langDropdown.addEventListener('change', function(e) {
+        gtag('event', 'language_switch', {
+          'from_language': document.documentElement.lang || 'en',
+          'to_language': e.target.value
+        });
+      });
+    });
+  });
+  </script>
+</body>
+</html>
