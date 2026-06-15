@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"><title>CHANFER GSC 快速索引</title>
+<style>body{font-family:system-ui;max-width:600px;margin:50px auto;padding:0 20px;}
+.btn{display:block;background:#1ED6A0;color:white;padding:20px;text-align:center;border-radius:8px;text-decoration:none;font-size:18px;font-weight:600;margin:20px 0;}
+.btn:hover{background:#0F4C3A;}</style>
+</head><body>
+<h1>CHANFER 快速 GSC 索引</h1>
+<p>点击下方按钮，浏览器会同时打开 GSC 和把所有 URL 复制到剪贴板。</p>
+
+<a class="btn" href="https://search.google.com/search-console" target="_blank">→ 打开 Google Search Console</a>
+
+<p><strong>复制后：</strong><br>
+在 GSC 顶部搜索框中 <code>Ctrl+V</code> 粘贴第一个 URL，按回车，开始索引流程。</p>
+
+<button class="btn" onclick="
+const urls = {
+  PAGES[:12]
+};
+
+urls.forEach((u, i) => setTimeout(() => {
+  navigator.clipboard.writeText(u);
+  const btn = document.getElementById('counter');
+  btn.textContent = `已复制 (${i+1}/${urls.length}): ${u}`;
+  console.log('Copied:', u);
+}, i * 2000));
+">📋 自动复制 12 个 URL（每 2 秒 1 个）</button>
+
+<p id="counter" style="background:#fef3c7;padding:12px;border-radius:6px;font-family:monospace;font-size:13px;">点击上方按钮开始</p>
+
+<p style="margin-top:40px;font-size:13px;color:#666;">
+<strong>说明：</strong>每次只复制 1 个 URL 是为了避免你点击"请求索引"按钮时错过。
+每 2 秒复制 1 个，给你 2 秒时间在 GSC 中操作。
+</p>
+
+</body></html>

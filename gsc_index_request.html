@@ -1,147 +1,187 @@
 <!DOCTYPE html>
 <html><head><meta charset="UTF-8">
-<title>GSC 请求编入索引 - CHANFER 48 Pages</title>
+<title>CHANFER GSC 索引助手</title>
 <style>
-body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; max-width: 900px; margin: 30px auto; padding: 0 20px; background: #fafafa; }
 h1 { color: #1C5A3A; border-bottom: 3px solid #1ED6A0; padding-bottom: 12px; }
-.item { background: #f9fafb; border-left: 4px solid #1ED6A0; padding: 12px 16px; margin: 8px 0; border-radius: 4px; }
-.item a { color: #0F4C3A; text-decoration: none; font-weight: 600; }
-.item a:hover { color: #1ED6A0; text-decoration: underline; }
-.item .url { font-size: 12px; color: #6b7280; font-family: monospace; margin-top: 4px; }
-.step { background: #FEF3C7; padding: 16px; border-radius: 8px; margin: 24px 0; }
+.top-btn { display: inline-block; background: #1ED6A0; color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; margin: 16px 0; }
+.top-btn:hover { background: #0F4C3A; }
+.step { background: #FEF3C7; padding: 20px; border-radius: 8px; margin: 24px 0; line-height: 1.7; }
+.item { background: white; border: 1px solid #e5e7eb; border-left: 4px solid #1ED6A0; padding: 14px 16px; margin: 8px 0; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; }
+.item.priority-1 { border-left-color: #DC2626; }
+.item.priority-2 { border-left-color: #F59E0B; }
+.item.priority-3 { border-left-color: #10B981; }
+.item .name { font-weight: 600; color: #0F4C3A; }
+.item .url { font-family: monospace; font-size: 13px; color: #4b5563; flex: 1; margin: 0 16px; user-select: all; }
+.item button { background: #1ED6A0; color: white; border: none; padding: 8px 14px; border-radius: 4px; cursor: pointer; font-weight: 500; }
+.item button:hover { background: #0F4C3A; }
+.item button.copied { background: #10B981; }
+footer { margin: 40px 0; padding: 20px; background: #f3f4f6; border-radius: 8px; font-size: 13px; color: #6b7280; }
 </style></head><body>
-<h1>🚀 GSC 批量请求编入索引</h1>
+<h1>🚀 CHANFER GSC 索引助手（v2 — 正确流程）</h1>
+<a class="top-btn" href="https://search.google.com/search-console" target="_blank">
+→ 打开 Google Search Console
+</a>
 <div class="step">
-<strong>使用步骤：</strong><br>
-1. 先在浏览器登录 <a href="https://search.google.com/search-console" target="_blank">Google Search Console</a><br>
-2. 点击下面的任意 URL，会跳转到该页的检查界面<br>
-3. 点击 "请求编入索引" 按钮（Google 允许每天 12 个 URL）<br>
-4. 等 1-3 天，状态变为 "已编入索引"
+<strong>⚠️ 重要</strong>：GSC 不支持 URL Inspection 的 query string 链接（会 404）。<br>
+正确流程：<br>
+<ol>
+<li>点击上面按钮打开 GSC 主页</li>
+<li>使用页面顶部的搜索框（"检查任何 https://..." 标题下面那个搜索框）</li>
+<li>从下面复制 URL 粘贴进去</li>
+<li>回车 → 进入检查页 → 点击 "请求编入索引"</li>
+<li>每天 12 个 URL 限额，分 3 天处理完 29 个</li>
+</ol>
 </div>
-<p><strong>48 个 URL，按优先级排序（前 12 个最关键）</strong></p>
-<div class="item">
-  <strong>🔴 #1. Homepage EN</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/</div>
+<p><strong>29 个 URL，按优先级排序</strong></p>
+<div class="item priority-1">
+  <span class="name">🔴 #1. Homepage EN</span>
+  <span class="url">https://www.chanferpack.com/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #2. Homepage ZH</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fzh%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/zh/</div>
+<div class="item priority-1">
+  <span class="name">🔴 #2. Homepage ZH</span>
+  <span class="url">https://www.chanferpack.com/zh/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/zh/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #3. Homepage RU</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fru%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/ru/</div>
+<div class="item priority-1">
+  <span class="name">🔴 #3. Homepage RU</span>
+  <span class="url">https://www.chanferpack.com/ru/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/ru/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #4. About</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fabout.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/about.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #4. Homepage ES</span>
+  <span class="url">https://www.chanferpack.com/es/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/es/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #5. Contact</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fcontact.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/contact.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #5. Homepage AR</span>
+  <span class="url">https://www.chanferpack.com/ar/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/ar/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #6. Pricing</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fpricing.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/pricing.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #6. Homepage PT</span>
+  <span class="url">https://www.chanferpack.com/pt/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/pt/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #7. Partners</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fpartners.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/partners.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #7. Homepage FR</span>
+  <span class="url">https://www.chanferpack.com/fr/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/fr/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #8. Resources</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fresources%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/resources/</div>
+<div class="item priority-1">
+  <span class="name">🔴 #8. About</span>
+  <span class="url">https://www.chanferpack.com/about.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/about.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #9. Equipment</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fequipment%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/equipment/</div>
+<div class="item priority-1">
+  <span class="name">🔴 #9. Contact</span>
+  <span class="url">https://www.chanferpack.com/contact.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/contact.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #10. Solutions</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fsolutions%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/solutions/</div>
+<div class="item priority-1">
+  <span class="name">🔴 #10. Pricing</span>
+  <span class="url">https://www.chanferpack.com/pricing.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/pricing.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #11. Bottle Line</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fsolutions%2Fbottle-line.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/solutions/bottle-line.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #11. Partners</span>
+  <span class="url">https://www.chanferpack.com/partners.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/partners.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🔴 #12. Pouch Line</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fsolutions%2Fpouch-line.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/solutions/pouch-line.html</div>
+<div class="item priority-1">
+  <span class="name">🔴 #12. Resources</span>
+  <span class="url">https://www.chanferpack.com/resources/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/resources/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #13. Drum Line</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fsolutions%2Fdrum-line.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/solutions/drum-line.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #13. Equipment</span>
+  <span class="url">https://www.chanferpack.com/equipment/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/equipment/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #14. Projects</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fprojects%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/projects/</div>
+<div class="item priority-2">
+  <span class="name">🟡 #14. Solutions</span>
+  <span class="url">https://www.chanferpack.com/solutions/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/solutions/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #15. Industries</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Findustries%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/industries/</div>
+<div class="item priority-2">
+  <span class="name">🟡 #15. Bottle Line</span>
+  <span class="url">https://www.chanferpack.com/solutions/bottle-line.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/solutions/bottle-line.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #16. Guides Hub</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fguides%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/guides/</div>
+<div class="item priority-2">
+  <span class="name">🟡 #16. Pouch Line</span>
+  <span class="url">https://www.chanferpack.com/solutions/pouch-line.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/solutions/pouch-line.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #17. Choose Manufacturer Guide</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fguides%2Fchoose-manufacturer.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/guides/choose-manufacturer.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #17. Drum Line</span>
+  <span class="url">https://www.chanferpack.com/solutions/drum-line.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/solutions/drum-line.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #18. Packaging Line Cost Guide</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fguides%2Fpackaging-line-cost.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/guides/packaging-line-cost.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #18. Projects</span>
+  <span class="url">https://www.chanferpack.com/projects/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/projects/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #19. Bottle vs Pouch vs Drum Guide</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fguides%2Fbottle-vs-pouch-vs-drum.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/guides/bottle-vs-pouch-vs-drum.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #19. Industries</span>
+  <span class="url">https://www.chanferpack.com/industries/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/industries/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #20. Importing from China Guide</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fguides%2Fimporting-packaging-line-from-china.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/guides/importing-packaging-line-from-china.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #20. Guides Hub</span>
+  <span class="url">https://www.chanferpack.com/guides/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/guides/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #21. Blog Hub</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fblog%2F" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/blog/</div>
+<div class="item priority-2">
+  <span class="name">🟡 #21. Choose Manufacturer Guide</span>
+  <span class="url">https://www.chanferpack.com/guides/choose-manufacturer.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/guides/choose-manufacturer.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #22. Africa Detergent Market 2026</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fblog%2Fafrica-detergent-market-2026.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/blog/africa-detergent-market-2026.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #22. Packaging Line Cost Guide</span>
+  <span class="url">https://www.chanferpack.com/guides/packaging-line-cost.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/guides/packaging-line-cost.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #23. Servo vs Pneumatic Filling</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fblog%2Fservo-vs-pneumatic-filling.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/blog/servo-vs-pneumatic-filling.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #23. Bottle vs Pouch vs Drum Guide</span>
+  <span class="url">https://www.chanferpack.com/guides/bottle-vs-pouch-vs-drum.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/guides/bottle-vs-pouch-vs-drum.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟡 #24. Nigeria 15000BPH Case Study</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fblog%2Fnigeria-15000bph-case-study.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/blog/nigeria-15000bph-case-study.html</div>
+<div class="item priority-2">
+  <span class="name">🟡 #24. Importing from China Guide</span>
+  <span class="url">https://www.chanferpack.com/guides/importing-packaging-line-from-china.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/guides/importing-packaging-line-from-china.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
-<div class="item">
-  <strong>🟢 #25. Importing from China to Russia Guide</strong><br>
-  <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fwww.chanferpack.com%2F&id=https%3A%2F%2Fwww.chanferpack.com%2Fblog%2Fimporting-packaging-machines-from-china-russia-cis-guide.html" target="_blank">→ 在 GSC 中打开此 URL 并请求索引</a>
-  <div class="url">https://www.chanferpack.com/blog/importing-packaging-machines-from-china-russia-cis-guide.html</div>
+<div class="item priority-3">
+  <span class="name">🟢 #25. Blog Hub</span>
+  <span class="url">https://www.chanferpack.com/blog/</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/blog/'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
 </div>
+<div class="item priority-3">
+  <span class="name">🟢 #26. Africa Detergent Market 2026</span>
+  <span class="url">https://www.chanferpack.com/blog/africa-detergent-market-2026.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/blog/africa-detergent-market-2026.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
+</div>
+<div class="item priority-3">
+  <span class="name">🟢 #27. Servo vs Pneumatic Filling</span>
+  <span class="url">https://www.chanferpack.com/blog/servo-vs-pneumatic-filling.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/blog/servo-vs-pneumatic-filling.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
+</div>
+<div class="item priority-3">
+  <span class="name">🟢 #28. Nigeria 15000BPH Case Study</span>
+  <span class="url">https://www.chanferpack.com/blog/nigeria-15000bph-case-study.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/blog/nigeria-15000bph-case-study.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
+</div>
+<div class="item priority-3">
+  <span class="name">🟢 #29. Importing from China to Russia Guide</span>
+  <span class="url">https://www.chanferpack.com/blog/importing-packaging-machines-from-china-russia-cis-guide.html</span>
+  <button onclick="navigator.clipboard.writeText('https://www.chanferpack.com/blog/importing-packaging-machines-from-china-russia-cis-guide.html'); this.textContent='已复制'; this.classList.add('copied');">📋 复制</button>
+</div>
+<footer>
+<strong>提示：</strong> IndexNow API 已推送 48 个 URL，Google 通常会在 4-24 小时内开始爬取。<br>
+GSC 手动请求索引可以加速到 1-3 天内开始索引。<br>
+建议：先看 12-24 小时后 GSC「效果」页面是否出现数据，再决定是否手动提交。
+</footer>
 </body></html>
