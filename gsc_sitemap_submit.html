@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GSC Sitemap 一键提交工作流 — CHANFER</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #e2e8f0; padding: 24px; min-height: 100vh; }
+  .container { max-width: 960px; margin: 0 auto; }
+  h1 { font-size: 28px; margin-bottom: 8px; color: #f8fafc; }
+  .subtitle { color: #94a3b8; margin-bottom: 32px; font-size: 14px; }
+  .status-banner { background: #dc2626; color: white; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px; font-weight: 600; }
+  .status-banner.ok { background: #059669; }
+  .card { background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 24px; margin-bottom: 16px; }
+  .card h2 { font-size: 20px; margin-bottom: 12px; color: #f8fafc; display: flex; align-items: center; gap: 10px; }
+  .step-num { display: inline-block; background: #FFC83C; color: #1C5A3A; width: 32px; height: 32px; border-radius: 50%; text-align: center; line-height: 32px; font-weight: 800; font-size: 16px; }
+  .url-box { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 14px; margin: 12px 0; font-family: 'Consolas', 'Monaco', monospace; font-size: 13px; word-break: break-all; color: #FFC83C; position: relative; }
+  .url-box .label { color: #94a3b8; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; display: block; }
+  .url-box .value { color: #f8fafc; }
+  button { background: #FFC83C; color: #1C5A3A; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 700; cursor: pointer; font-size: 14px; margin-top: 8px; transition: all 0.2s; }
+  button:hover { background: #f59e0b; }
+  button.copied { background: #059669; color: white; }
+  .screenshot { background: #0f172a; border: 2px dashed #475569; border-radius: 8px; padding: 30px; text-align: center; color: #94a3b8; font-size: 14px; margin: 16px 0; }
+  .screenshot strong { color: #FFC83C; display: block; margin-bottom: 6px; font-size: 16px; }
+  .arrow { text-align: center; color: #FFC83C; font-size: 24px; margin: 8px 0; }
+  .engine-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 16px 0; }
+  .engine-pill { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+  .engine-pill .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.green { background: #10b981; box-shadow: 0 0 8px #10b981; }
+  .dot.red { background: #ef4444; }
+  .dot.yellow { background: #fbbf24; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 16px 0; }
+  .stat { background: #0f172a; border-left: 4px solid #FFC83C; padding: 12px 16px; border-radius: 4px; }
+  .stat .num { font-size: 28px; font-weight: 800; color: #FFC83C; }
+  .stat .desc { color: #94a3b8; font-size: 12px; margin-top: 4px; }
+  .timeline { background: #0f172a; border-left: 3px solid #FFC83C; padding: 12px 16px; margin: 8px 0; border-radius: 0 6px 6px 0; }
+  .timeline strong { color: #FFC83C; }
+  .note { background: #1e3a5f; border-left: 4px solid #3b82f6; padding: 12px 16px; border-radius: 4px; margin: 12px 0; font-size: 14px; }
+  .warning { background: #422006; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 4px; margin: 12px 0; font-size: 14px; }
+  .all-urls { background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 16px; max-height: 320px; overflow-y: auto; font-family: 'Consolas', monospace; font-size: 12px; line-height: 1.7; }
+  .all-urls a { color: #60a5fa; text-decoration: none; }
+  .all-urls a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🚀 GSC Sitemap 一键提交工作流</h1>
+  <p class="subtitle">chanferpack.com · 2026-06-15 · 当前 GSC 状态:已提交 0 个</p>
+
+  <div class="status-banner">
+    ⚠️ 当前问题:GSC 后台"已提交的站点地图"为 0,需手动提交主 sitemap 才能开始追踪索引
+  </div>
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat">
+      <div class="num">50</div>
+      <div class="desc">sitemap.xml URL 数量</div>
+    </div>
+    <div class="stat">
+      <div class="num">19</div>
+      <div class="desc">sitemap-ru.xml (俄语)</div>
+    </div>
+    <div class="stat">
+      <div class="num">7</div>
+      <div class="desc">支持语言版本</div>
+    </div>
+    <div class="stat">
+      <div class="num">10KB</div>
+      <div class="desc">sitemap.xml 体积</div>
+    </div>
+  </div>
+
+  <!-- STEP 1: Open GSC -->
+  <div class="card">
+    <h2><span class="step-num">1</span> 打开 Google Search Console</h2>
+    <p style="color:#cbd5e1; margin-bottom:12px;">点击下方按钮,系统会直接定位到"Sitemap 提交"输入框:</p>
+    <div class="url-box">
+      <span class="label">GSC 站点地图提交页直链</span>
+      <span class="value">https://search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fchanferpack.com%2F</span>
+    </div>
+    <button onclick="copyText('https://search.google.com/search-console/sitemaps?resource_id=https%3A%2F%2Fchanferpack.com%2F', this)">📋 复制 GSC 链接</button>
+    <div class="screenshot">
+      <strong>📍 路径:</strong>左侧导航 → 索引 → 站点地图<br>
+      右侧"Sitemap 提交"输入框,直接粘贴下面的 URL
+    </div>
+  </div>
+
+  <!-- STEP 2: Submit Sitemaps -->
+  <div class="card">
+    <h2><span class="step-num">2</span> 提交 4 个 Sitemap(只需粘贴 1 次提交 1 个,共 4 次)</h2>
+
+    <p style="color:#cbd5e1; margin-bottom:8px;"><strong style="color:#FFC83C;">优先级最高 ⭐:</strong>主 sitemap(包含全站 50 个 URL)</p>
+    <div class="url-box">
+      <span class="label">Sitemap 1 · 主站 (50 URL · 必提交)</span>
+      <span class="value">https://www.chanferpack.com/sitemap.xml</span>
+    </div>
+    <button onclick="copyText('https://www.chanferpack.com/sitemap.xml', this)">📋 复制</button>
+
+    <p style="color:#cbd5e1; margin:20px 0 8px;"><strong style="color:#FFC83C;">优先级高 ⭐:</strong>俄语专用 sitemap(Yandex + Google RU 区域)</p>
+    <div class="url-box">
+      <span class="label">Sitemap 2 · 俄语 (19 URL · 推荐)</span>
+      <span class="value">https://www.chanferpack.com/sitemap-ru.xml</span>
+    </div>
+    <button onclick="copyText('https://www.chanferpack.com/sitemap-ru.xml', this)">📋 复制</button>
+
+    <p style="color:#cbd5e1; margin:20px 0 8px;">Sitemap Index(包含以上 + image-sitemap + turbo-ru 的元索引)</p>
+    <div class="url-box">
+      <span class="label">Sitemap 3 · 索引页 (可选)</span>
+      <span class="value">https://www.chanferpack.com/sitemap-index.xml</span>
+    </div>
+    <button onclick="copyText('https://www.chanferpack.com/sitemap-index.xml', this)">📋 复制</button>
+
+    <p style="color:#cbd5e1; margin:20px 0 8px;">图片 sitemap(Google 图片搜索优化)</p>
+    <div class="url-box">
+      <span class="label">Sitemap 4 · 图片 (可选)</span>
+      <span class="value">https://www.chanferpack.com/image-sitemap.xml</span>
+    </div>
+    <button onclick="copyText('https://www.chanferpack.com/image-sitemap.xml', this)">📋 复制</button>
+  </div>
+
+  <!-- STEP 3: Verification -->
+  <div class="card">
+    <h2><span class="step-num">3</span> 验证提交结果(等待 5-30 分钟)</h2>
+    <p style="color:#cbd5e1; margin-bottom:12px;">GSC 刷新后会显示:</p>
+    <div class="screenshot">
+      <strong>✅ 正常状态:</strong>"成功" + 已提交网址数 = 50<br>
+      <span style="color:#94a3b8;">⚠️ 如果显示 0:可能是格式错误,粘贴 URL 时不要带 <code>https://</code> 后的多余字符</span>
+    </div>
+
+    <div class="note">
+      💡 <strong>技巧:</strong>在 GSC "Sitemap 提交"输入框中,只粘贴域名后的路径。例如 <code>sitemap.xml</code>(不要 <code>https://www.chanferpack.com/sitemap.xml</code>)。
+    </div>
+  </div>
+
+  <!-- Bing Webmaster -->
+  <div class="card">
+    <h2><span class="step-num">4</span> Bing Webmaster Tools(同样的 sitemap 提交)</h2>
+    <p style="color:#cbd5e1; margin-bottom:12px;">如果还没注册 Bing:<a href="https://www.bing.com/webmasters" target="_blank" style="color:#60a5fa;">https://www.bing.com/webmasters</a></p>
+    <div class="url-box">
+      <span class="label">Bing Sitemap 提交 URL</span>
+      <span class="value">https://www.bing.com/webmasters/ping?sitemap=https%3A%2F%2Fwww.chanferpack.com%2Fsitemap.xml</span>
+    </div>
+    <button onclick="copyText('https://www.bing.com/webmasters/ping?sitemap=https%3A%2F%2Fwww.chanferpack.com%2Fsitemap.xml', this)">📋 复制</button>
+  </div>
+
+  <!-- Yandex -->
+  <div class="card">
+    <h2><span class="step-num">5</span> Yandex Webmaster(俄语市场专用)</h2>
+    <p style="color:#cbd5e1; margin-bottom:12px;">注册 Yandex Webmaster:<a href="https://webmaster.yandex.com" target="_blank" style="color:#60a5fa;">https://webmaster.yandex.com</a></p>
+    <p style="color:#cbd5e1; margin-bottom:12px;">在 Yandex Webmaster → Indexing → Sitemap files,提交以下 2 个:</p>
+    <div class="url-box">
+      <span class="label">Yandex Sitemap 1</span>
+      <span class="value">https://www.chanferpack.com/sitemap-ru.xml</span>
+    </div>
+    <div class="url-box">
+      <span class="label">Yandex Sitemap 2</span>
+      <span class="value">https://www.chanferpack.com/turbo-ru.xml</span>
+    </div>
+  </div>
+
+  <!-- Current status -->
+  <div class="card">
+    <h2>📊 实时搜索引擎 Ping 状态</h2>
+    <div class="engine-grid">
+      <div class="engine-pill"><span class="dot yellow"></span> Google — 待手动提交 GSC</div>
+      <div class="engine-pill"><span class="dot yellow"></span> Bing — 待手动提交 Webmaster</div>
+      <div class="engine-pill"><span class="dot green"></span> Yandex — ✅ Ping 200 OK</div>
+      <div class="engine-pill"><span class="dot green"></span> IndexNow — ✅ 48 URL 推送成功</div>
+    </div>
+
+    <div class="warning">
+      ⚠️ <strong>Google sitemap ping 接口已废弃(2023年起):</strong>Google 不再接受 <code>www.google.com/ping?sitemap=...</code> 这种 URL ping,必须通过 GSC 后台提交。这是 Google 主动选择"强制"使用 GSC 而非开放 ping。
+    </div>
+  </div>
+
+  <!-- Timeline -->
+  <div class="card">
+    <h2>⏱️ 提交后预期时间线</h2>
+    <div class="timeline"><strong>0-30 分钟</strong> · GSC 显示 sitemap "已处理"</div>
+    <div class="timeline"><strong>2-6 小时</strong> · Googlebot 开始抓取 sitemap 中列出的 URL</div>
+    <div class="timeline"><strong>12-48 小时</strong> · "网页"索引从 0 增长到 20-50 个</div>
+    <div class="timeline"><strong>3-7 天</strong> · 全部 50 个 URL 进入索引</div>
+    <div class="timeline"><strong>7-14 天</strong> · 搜索结果开始展示(取决于内容质量 + 外链)</div>
+  </div>
+
+  <!-- All URLs list -->
+  <div class="card">
+    <h2>📄 sitemap.xml 全部 50 个 URL</h2>
+    <div class="all-urls">
+      <a href="https://www.chanferpack.com/" target="_blank">https://www.chanferpack.com/</a> (1.0)<br>
+      <a href="https://www.chanferpack.com/zh/" target="_blank">https://www.chanferpack.com/zh/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/es/" target="_blank">https://www.chanferpack.com/es/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/ar/" target="_blank">https://www.chanferpack.com/ar/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/pt/" target="_blank">https://www.chanferpack.com/pt/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/fr/" target="_blank">https://www.chanferpack.com/fr/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/ru/" target="_blank">https://www.chanferpack.com/ru/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/solutions/" target="_blank">https://www.chanferpack.com/solutions/</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/solutions/bottle-line.html" target="_blank">https://www.chanferpack.com/solutions/bottle-line.html</a> (0.9)<br>
+      <a href="https://www.chanferpack.com/solutions/pouch-line.html" target="_blank">https://www.chanferpack.com/solutions/pouch-line.html</a> (0.8)<br>
+      <a href="https://www.chanferpack.com/solutions/drum-line.html" target="_blank">https://www.chanferpack.com/solutions/drum-line.html</a> (0.8)<br>
+      <a href="https://www.chanferpack.com/industries/" target="_blank">https://www.chanferpack.com/industries/</a> (0.7)<br>
+      <a href="https://www.chanferpack.com/equipment/" target="_blank">https://www.chanferpack.com/equipment/</a> (0.7)<br>
+      <a href="https://www.chanferpack.com/projects/" target="_blank">https://www.chanferpack.com/projects/</a> (0.8)<br>
+      <a href="https://www.chanferpack.com/guides/" target="_blank">https://www.chanferpack.com/guides/</a> (0.6)<br>
+      <a href="https://www.chanferpack.com/about.html" target="_blank">https://www.chanferpack.com/about.html</a> (0.7)<br>
+      <a href="https://www.chanferpack.com/contact.html" target="_blank">https://www.chanferpack.com/contact.html</a> (0.6)<br>
+      <a href="https://www.chanferpack.com/pricing.html" target="_blank">https://www.chanferpack.com/pricing.html</a> (0.8)<br>
+      <a href="https://www.chanferpack.com/partners.html" target="_blank">https://www.chanferpack.com/partners.html</a> (0.7)<br>
+      <a href="https://www.chanferpack.com/resources/" target="_blank">https://www.chanferpack.com/resources/</a> (0.7)<br>
+      <span style="color:#94a3b8;">... + 30 俄语内页 + 资源页 + turbo-ru.xml 等</span>
+    </div>
+  </div>
+
+  <div class="note" style="margin-top:24px;">
+    <strong>📌 总结:</strong>Google 强制要求通过 GSC 后台提交(无 ping 捷径)。已自动完成:IndexNow 推送(48 URL)✅、Yandex Ping ✅、sitemap 拆分 ✅。需手动:GSC 提交 1-2 个 sitemap(5 分钟)。
+  </div>
+
+</div>
+
+<script>
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    const orig = btn.textContent;
+    btn.textContent = '✅ 已复制!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = orig;
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+</body>
+</html>
