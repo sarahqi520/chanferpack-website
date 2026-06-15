@@ -62,3 +62,6 @@ Disallow: /
 
 User-agent: ImagesiftBot
 Disallow: /
+
+# Yandex Turbo Pages RSS feed
+Sitemap: https://www.chanferpack.com/turbo-ru.xml
