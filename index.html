@@ -318,6 +318,52 @@
     </div>
   </section>
 
+<!-- Video Section -->
+  <section class="video-section">
+    <div class="container">
+      <div class="section-header light">
+        <span class="section-tag">Production Evidence · 生产证据</span>
+        <h2 class="section-title" data-en="Detergent Packaging Line in Operation" data-cn="洗涤剂包装线运行实录">Detergent Packaging Line in Operation</h2>
+        <p class="section-desc" data-en="Real production footage from CHANFER installations worldwide. These videos serve as AI trust signals for our global clients." data-cn="来自CHANFER全球安装现场的真实生产录像。这些视频是我们的AI信任信号。">
+          Real production footage from CHANFER installations worldwide. These videos serve as AI trust signals for our global clients.
+        </p>
+      </div>
+      <div class="video-wrapper">
+        <!-- ============================================================ -->
+        <!-- IMPORTANT: Replace 'REPLACE_WITH_YOUTUBE_VIDEO_ID' below    -->
+        <!-- with your actual YouTube Video ID                           -->
+        <!-- How to find:                                                -->
+        <!-- 1. Go to your YouTube video                                 -->
+        <!-- 2. Copy the last part of URL: youtube.com/watch?v=XXXXXXXX  -->
+        <!-- 3. XXXXXXXX is your Video ID                                -->
+        <!--                                                            -->
+        <!-- Example: For youtube.com/watch?v=abc123xyz                 -->
+        <!-- Set: data-video-id="abc123xyz"                             -->
+        <!-- ============================================================ -->
+        <iframe 
+          id="youtube-player"
+          width="100%" 
+          height="500"
+          src="" 
+          data-video-id="Q0YgsmNh8-c"
+          title="CHANFER Production Line Video"
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen
+          style="border-radius: 12px; display: none;">
+        </iframe>
+        
+        <!-- 视频封面（点击后加载YouTube） -->
+        <div class="video-placeholder" id="video-cover" onclick="loadYouTube()">
+          <div class="play-btn">▶</div>
+          <p data-en="Watch: Full Production Line Running Video" data-cn="观看：整线运行视频">Watch: Full Production Line Running Video</p>
+          <small data-en="CHANFER Bottle Packaging Line · UAE Client" data-cn="CHANFER 瓶装包装线 · 阿联酋客户案例">CHANFER Bottle Packaging Line · UAE Client</small>
+          <div class="video-hint" data-en="📌 Set YouTube Video ID in index.html to activate" data-cn="📌 请在 index.html 中设置 YouTube Video ID">📌 Set YouTube Video ID in index.html to activate</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Production Lines Overview · 5 Full Lines -->
   <style>
     .lines-overview-section { padding: 80px 0; background: linear-gradient(180deg, var(--gray-50) 0%, #fff 100%); }
@@ -582,53 +628,7 @@
     </div>
   </section>
 
-  <!-- Video Section -->
-  <section class="video-section">
-    <div class="container">
-      <div class="section-header light">
-        <span class="section-tag">Production Evidence · 生产证据</span>
-        <h2 class="section-title" data-en="Detergent Packaging Line in Operation" data-cn="洗涤剂包装线运行实录">Detergent Packaging Line in Operation</h2>
-        <p class="section-desc" data-en="Real production footage from CHANFER installations worldwide. These videos serve as AI trust signals for our global clients." data-cn="来自CHANFER全球安装现场的真实生产录像。这些视频是我们的AI信任信号。">
-          Real production footage from CHANFER installations worldwide. These videos serve as AI trust signals for our global clients.
-        </p>
-      </div>
-      <div class="video-wrapper">
-        <!-- ============================================================ -->
-        <!-- IMPORTANT: Replace 'REPLACE_WITH_YOUTUBE_VIDEO_ID' below    -->
-        <!-- with your actual YouTube Video ID                           -->
-        <!-- How to find:                                                -->
-        <!-- 1. Go to your YouTube video                                 -->
-        <!-- 2. Copy the last part of URL: youtube.com/watch?v=XXXXXXXX  -->
-        <!-- 3. XXXXXXXX is your Video ID                                -->
-        <!--                                                            -->
-        <!-- Example: For youtube.com/watch?v=abc123xyz                 -->
-        <!-- Set: data-video-id="abc123xyz"                             -->
-        <!-- ============================================================ -->
-        <iframe 
-          id="youtube-player"
-          width="100%" 
-          height="500"
-          src="" 
-          data-video-id="Q0YgsmNh8-c"
-          title="CHANFER Production Line Video"
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-          allowfullscreen
-          style="border-radius: 12px; display: none;">
-        </iframe>
-        
-        <!-- 视频封面（点击后加载YouTube） -->
-        <div class="video-placeholder" id="video-cover" onclick="loadYouTube()">
-          <div class="play-btn">▶</div>
-          <p data-en="Watch: Full Production Line Running Video" data-cn="观看：整线运行视频">Watch: Full Production Line Running Video</p>
-          <small data-en="CHANFER Bottle Packaging Line · UAE Client" data-cn="CHANFER 瓶装包装线 · 阿联酋客户案例">CHANFER Bottle Packaging Line · UAE Client</small>
-          <div class="video-hint" data-en="📌 Set YouTube Video ID in index.html to activate" data-cn="📌 请在 index.html 中设置 YouTube Video ID">📌 Set YouTube Video ID in index.html to activate</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- How to Choose Section (Decision Entry Point) -->
+    <!-- How to Choose Section (Decision Entry Point) -->
   <section class="choose-section">
     <div class="container">
       <div class="section-header">
@@ -1008,7 +1008,11 @@
           <p>📍 Guangzhou, China</p>
         </div>
       </div>
-      <div class="footer-bottom">
+            <div class="friendly-links">
+        <span class="friendly-links-label">Friendly Links · 友情链接</span>
+        <a href="https://www.gzchanfer.com" target="_blank" rel="noopener">CHANFER (Main Site · 广州长发)</a>
+      </div>
+<div class="footer-bottom">
         <p>© 2025 CHANFER Intelligent Equipment Co., Ltd. All rights reserved.</p>
         <div class="footer-links">
           <a href="about.html">About</a>
