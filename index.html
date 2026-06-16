@@ -319,70 +319,105 @@
   </section>
 
   <!-- Production Lines Overview · 5 Full Lines -->
-  <section class="lines-overview-section" style="padding:80px 0;background:linear-gradient(180deg,var(--gray-50) 0%,#fff 100%);">
+  <style>
+    .lines-overview-section { padding: 80px 0; background: linear-gradient(180deg, var(--gray-50) 0%, #fff 100%); }
+    .lines-overview-hero { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-bottom: 24px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .lines-overview-hero:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(28,90,58,0.15); }
+    .lines-overview-hero-img { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; }
+    .lines-overview-hero-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .lines-overview-hero-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .lines-overview-hero-body h3 { font-size: 28px; font-weight: 800; margin: 12px 0 14px; color: var(--gray-900); line-height: 1.2; }
+    .lines-overview-hero-body p { font-size: 15px; color: var(--gray-700); margin: 0 0 20px; line-height: 1.65; }
+    .lines-overview-grid-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .lines-overview-mini { display: block; text-decoration: none; color: inherit; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .lines-overview-mini:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(28,90,58,0.12); }
+    .lines-overview-mini-img { background: #f8f9fa; padding: 16px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+    .lines-overview-mini-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .lines-overview-mini-body { padding: 18px 20px; }
+    .lines-overview-mini-body h3 { font-size: 17px; font-weight: 700; margin: 8px 0 6px; color: var(--gray-900); }
+    .lines-overview-mini-body p { font-size: 13px; color: var(--gray-600); margin: 0; line-height: 1.5; }
+    .line-tag { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+    .line-tag-hero { font-size: 12px; padding: 5px 12px; }
+    .line-view { display: inline-block; margin-top: 14px; color: #1C5A3A; font-weight: 700; font-size: 14px; }
+    @media (max-width: 900px) {
+      .lines-overview-hero { grid-template-columns: 1fr; }
+      .lines-overview-hero-img { aspect-ratio: 16/9; }
+      .lines-overview-hero-body { padding: 24px; }
+      .lines-overview-hero-body h3 { font-size: 22px; }
+    }
+    @media (max-width: 560px) {
+      .lines-overview-grid-mini { grid-template-columns: 1fr; }
+    }
+  </style>
+  <section class="lines-overview-section">
     <div class="container">
       <div class="section-header" style="text-align:center;margin-bottom:48px;">
         <span class="section-tag">Complete Production Lines · 完整生产线</span>
         <h2 class="section-title" data-en="5 Turnkey Packaging Lines, One Manufacturer" data-cn="5条交钥匙包装生产线，一站式制造">5 Turnkey Packaging Lines, One Manufacturer</h2>
         <p class="section-subtitle" data-en="From stand-up pouches to 30L industrial drums — CHANFER delivers complete turnkey packaging lines for every format of liquid detergent production." data-cn="从自立袋到30L工业桶，CHANFER 为各种液体洗涤剂提供完整的交钥匙包装生产线。">From stand-up pouches to 30L industrial drums — CHANFER delivers complete turnkey packaging lines for every format of liquid detergent production.</p>
       </div>
-      <div class="lines-overview-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-        <a href="solutions/bottle-line.html" class="line-overview-card" style="text-decoration:none;color:inherit;background:#fff;border-radius:var(--radius,12px);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;">
-          <div style="background:#f8f9fa;padding:16px;aspect-ratio:5.77/1;display:flex;align-items:center;justify-content:center;">
-            <img src="images/bottle-detergent-line.jpg" alt="Bottle Detergent Packaging Line" style="max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply;" loading="lazy">
+
+      <!-- Hero Card: Bottle Line (most popular, full detail) -->
+      <a href="solutions/bottle-line.html" class="lines-overview-hero">
+        <div class="lines-overview-hero-img">
+          <img src="images/bottle-detergent-line.jpg" alt="Bottle Detergent Packaging Line" loading="lazy">
+        </div>
+        <div class="lines-overview-hero-body">
+          <span class="line-tag line-tag-hero" style="background:#1C5A3A;color:#fff;">★ #1 Most Popular</span>
+          <h3>Bottle Detergent Packaging Line</h3>
+          <p>Turnkey bottle line for liquid detergent, dish soap, and laundry products. Complete workflow: bottle unscrambling → servo filling → capping → labeling → coding → case packing → robotic palletizing. Capacity 2,000–8,000 BPH.</p>
+          <span class="line-view">View Solution →</span>
+        </div>
+      </a>
+
+      <!-- 2×2 Mini Grid: 4 other lines -->
+      <div class="lines-overview-grid-mini">
+        <a href="solutions/pouch-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img">
+            <img src="images/stand-up-pouch-line.jpg" alt="Stand-up Pouch Packaging Line" loading="lazy">
           </div>
-          <div style="padding:20px;">
-            <span style="display:inline-block;background:#1C5A3A;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px;">#1 Most Popular</span>
-            <h3 style="font-size:20px;font-weight:700;margin:8px 0;color:var(--gray-900);">Bottle Detergent Line</h3>
-            <p style="font-size:14px;color:var(--gray-600);margin:0;line-height:1.5;">Bottle unscrambling → Servo filling → Capping → Labeling → Coding → Case packing → Palletizing. 2,000–8,000 BPH.</p>
-            <span style="display:inline-block;margin-top:12px;color:#1C5A3A;font-weight:600;font-size:14px;">View Solution →</span>
-          </div>
-        </a>
-        <a href="solutions/pouch-line.html" class="line-overview-card" style="text-decoration:none;color:inherit;background:#fff;border-radius:var(--radius,12px);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;">
-          <div style="background:#f8f9fa;padding:16px;aspect-ratio:3.13/1;display:flex;align-items:center;justify-content:center;">
-            <img src="images/stand-up-pouch-line.jpg" alt="Stand-up Pouch Packaging Line" style="max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply;" loading="lazy">
-          </div>
-          <div style="padding:20px;">
-            <span style="display:inline-block;background:#FFC83C;color:#1C5A3A;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px;">Eco-Friendly</span>
-            <h3 style="font-size:20px;font-weight:700;margin:8px 0;color:var(--gray-900);">Stand-up Pouch Line</h3>
-            <p style="font-size:14px;color:var(--gray-600);margin:0;line-height:1.5;">Pre-made bag feeding → Servo filling → Heat sealing → Coding → Cartoning. 1,500–6,000 pouches/hour.</p>
-            <span style="display:inline-block;margin-top:12px;color:#1C5A3A;font-weight:600;font-size:14px;">View Solution →</span>
-          </div>
-        </a>
-        <a href="solutions/spout-pouch-line.html" class="line-overview-card" style="text-decoration:none;color:inherit;background:#fff;border-radius:var(--radius,12px);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;">
-          <div style="background:#f8f9fa;padding:16px;aspect-ratio:2.80/1;display:flex;align-items:center;justify-content:center;">
-            <img src="images/spout-pouch-line.jpg" alt="Spout Pouch Packaging Line" style="max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply;" loading="lazy">
-          </div>
-          <div style="padding:20px;">
-            <span style="display:inline-block;background:#FF6B35;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px;">Growing Market</span>
-            <h3 style="font-size:20px;font-weight:700;margin:8px 0;color:var(--gray-900);">Spout Pouch Line</h3>
-            <p style="font-size:14px;color:var(--gray-600);margin:0;line-height:1.5;">Spout insertion → Liquid filling → Heat sealing → Cap application. Ideal for liquid detergent refills.</p>
-            <span style="display:inline-block;margin-top:12px;color:#1C5A3A;font-weight:600;font-size:14px;">View Solution →</span>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#FFC83C;color:#1C5A3A;">Eco-Friendly</span>
+            <h3>Stand-up Pouch Line</h3>
+            <p>1,500–6,000 pouches/hour · 40–60% lower material cost than rigid bottles.</p>
+            <span class="line-view" style="font-size:13px;">View Solution →</span>
           </div>
         </a>
-        <a href="solutions/refill-pack-line.html" class="line-overview-card" style="text-decoration:none;color:inherit;background:#fff;border-radius:var(--radius,12px);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;">
-          <div style="background:#f8f9fa;padding:16px;aspect-ratio:2.76/1;display:flex;align-items:center;justify-content:center;">
-            <img src="images/refill-pack-line.jpg" alt="Refill Pack Packaging Line" style="max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply;" loading="lazy">
+        <a href="solutions/spout-pouch-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img">
+            <img src="images/spout-pouch-line.jpg" alt="Spout Pouch Packaging Line" loading="lazy">
           </div>
-          <div style="padding:20px;">
-            <span style="display:inline-block;background:#4CAF50;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px;">Lowest Cost</span>
-            <h3 style="font-size:20px;font-weight:700;margin:8px 0;color:var(--gray-900);">Refill Pack Line</h3>
-            <p style="font-size:14px;color:var(--gray-600);margin:0;line-height:1.5;">Form-fill-seal technology for ultra-low-cost refill packs. 60% less plastic vs rigid bottles.</p>
-            <span style="display:inline-block;margin-top:12px;color:#1C5A3A;font-weight:600;font-size:14px;">View Solution →</span>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#FF6B35;color:#fff;">Growing Market</span>
+            <h3>Spout Pouch Line</h3>
+            <p>Spout insertion + liquid filling + heat sealing for refill-format detergents.</p>
+            <span class="line-view" style="font-size:13px;">View Solution →</span>
           </div>
         </a>
-        <a href="solutions/drum-line.html" class="line-overview-card" style="text-decoration:none;color:inherit;background:#fff;border-radius:var(--radius,12px);overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,0.06);transition:all 0.3s ease;grid-column:span 1;">
-          <div style="background:#f8f9fa;padding:16px;aspect-ratio:4.32/1;display:flex;align-items:center;justify-content:center;">
-            <img src="images/drum-detergent-line.jpg" alt="Drum Detergent Packaging Line" style="max-width:100%;max-height:100%;object-fit:contain;mix-blend-mode:multiply;" loading="lazy">
+        <a href="solutions/refill-pack-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img">
+            <img src="images/refill-pack-line.jpg" alt="Refill Pack Packaging Line" loading="lazy">
           </div>
-          <div style="padding:20px;">
-            <span style="display:inline-block;background:#5C6BC0;color:#fff;padding:4px 10px;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px;">Industrial</span>
-            <h3 style="font-size:20px;font-weight:700;margin:8px 0;color:var(--gray-900);">Drum Detergent Line</h3>
-            <p style="font-size:14px;color:var(--gray-600);margin:0;line-height:1.5;">5L–30L heavy-duty industrial packaging. Drum filling, sealing, labeling, palletizing for B2B production.</p>
-            <span style="display:inline-block;margin-top:12px;color:#1C5A3A;font-weight:600;font-size:14px;">View Solution →</span>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#4CAF50;color:#fff;">Lowest Cost</span>
+            <h3>Refill Pack Line</h3>
+            <p>Form-fill-seal technology · 60% less plastic vs rigid bottles.</p>
+            <span class="line-view" style="font-size:13px;">View Solution →</span>
+          </div>
+        </a>
+        <a href="solutions/drum-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img">
+            <img src="images/drum-detergent-line.jpg" alt="Drum Detergent Packaging Line" loading="lazy">
+          </div>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#5C6BC0;color:#fff;">Industrial</span>
+            <h3>Drum Detergent Line</h3>
+            <p>5L–30L industrial drums · B2B production with palletizing automation.</p>
+            <span class="line-view" style="font-size:13px;">View Solution →</span>
           </div>
         </a>
       </div>
+
       <div style="text-align:center;margin-top:48px;">
         <a href="solutions/index.html" class="btn-primary" data-en="View All Solutions →" data-cn="查看全部解决方案 →">View All Solutions →</a>
       </div>
