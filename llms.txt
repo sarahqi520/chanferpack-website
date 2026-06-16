@@ -206,3 +206,7 @@ LAST UPDATED
 ================================================================================
 
 2026-06-14
+
+## New Solution Pages (2026-06-16)
+- /solutions/spout-pouch-line.html — Spout Pouch Liquid Detergent Packaging Line
+- /solutions/refill-pack-line.html — Refill Pack Liquid Detergent Packaging Line (eco-friendly FFS)
