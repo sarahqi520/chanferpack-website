@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CHANFER 网站管理后台</title>
+<meta name="robots" content="noindex, nofollow">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<style>
+:root {
+  --green: #1C5A3A;
+  --green-light: #2a7a52;
+  --gold: #FFC83C;
+  --bg: #f0f4f1;
+  --white: #ffffff;
+  --border: #d0ddd5;
+  --text: #1a2e22;
+  --muted: #6b8a74;
+  --danger: #c0392b;
+  --success: #27ae60;
+  --radius: 10px;
+  --shadow: 0 2px 12px rgba(28,90,58,0.10);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+/* LOGIN */
+#login-page { display: flex; align-items: center; justify-content: center; min-height: 100vh; }
+.login-box { background: var(--white); border-radius: 16px; padding: 48px 40px; width: 380px; box-shadow: 0 8px 40px rgba(28,90,58,0.15); text-align: center; }
+.login-logo { font-size: 28px; font-weight: 800; color: var(--green); margin-bottom: 8px; }
+.login-logo span { color: var(--gold); }
+.login-sub { color: var(--muted); font-size: 14px; margin-bottom: 32px; }
+.btn-github { display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%; padding: 14px; background: #24292e; color: white; border: none; border-radius: var(--radius); font-size: 16px; font-weight: 600; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+.btn-github:hover { background: #1a1f24; }
+.btn-github svg { width: 24px; height: 24px; fill: white; }
+.login-note { margin-top: 20px; font-size: 12px; color: var(--muted); line-height: 1.6; }
+
+/* LAYOUT */
+#app { display: none; min-height: 100vh; }
+.sidebar { position: fixed; left: 0; top: 0; bottom: 0; width: 220px; background: var(--green); color: white; display: flex; flex-direction: column; z-index: 100; }
+.sidebar-logo { padding: 24px 20px; font-size: 20px; font-weight: 800; border-bottom: 1px solid rgba(255,255,255,0.12); }
+.sidebar-logo span { color: var(--gold); }
+.sidebar-sub { font-size: 11px; opacity: 0.6; font-weight: 400; display: block; margin-top: 2px; }
+.sidebar-nav { flex: 1; padding: 16px 0; }
+.nav-item { display: flex; align-items: center; gap: 10px; padding: 12px 20px; color: rgba(255,255,255,0.8); cursor: pointer; transition: all 0.2s; font-size: 14px; border: none; background: none; width: 100%; text-align: left; }
+.nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.12); color: white; }
+.nav-item .icon { font-size: 18px; width: 24px; text-align: center; }
+.sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.12); }
+.user-info { display: flex; align-items: center; gap: 10px; }
+.user-avatar { width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.2); }
+.user-name { font-size: 13px; color: rgba(255,255,255,0.9); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.btn-logout { background: none; border: none; color: rgba(255,255,255,0.5); cursor: pointer; font-size: 12px; padding: 4px 8px; }
+.btn-logout:hover { color: white; }
+.main { margin-left: 220px; padding: 32px; min-height: 100vh; }
+.page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+.page-title { font-size: 24px; font-weight: 700; color: var(--green); }
+.page-title small { font-size: 14px; font-weight: 400; color: var(--muted); margin-left: 8px; }
+
+/* BUTTONS */
+.btn { padding: 10px 20px; border-radius: var(--radius); font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px; }
+.btn-primary { background: var(--green); color: white; }
+.btn-primary:hover { background: var(--green-light); }
+.btn-secondary { background: white; color: var(--green); border: 1.5px solid var(--border); }
+.btn-secondary:hover { border-color: var(--green); }
+.btn-danger { background: var(--danger); color: white; }
+.btn-danger:hover { opacity: 0.85; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-gold { background: var(--gold); color: var(--green); }
+.btn-gold:hover { opacity: 0.9; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* CARDS */
+.card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); }
+.card-header { padding: 16px 24px; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.card-body { padding: 24px; }
+
+/* TABLE */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { padding: 10px 16px; text-align: left; background: #f5f8f6; color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+td { padding: 14px 16px; border-bottom: 1px solid #eef2ef; vertical-align: middle; }
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: #f9fbfa; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
+.badge-published { background: #d4edda; color: #155724; }
+.badge-draft { background: #fff3cd; color: #856404; }
+.actions { display: flex; gap: 8px; }
+
+/* FORM */
+.form-group { margin-bottom: 20px; }
+.form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+.form-label .required { color: var(--danger); }
+.form-control { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: var(--radius); font-size: 14px; color: var(--text); transition: border 0.2s; background: white; }
+.form-control:focus { outline: none; border-color: var(--green); }
+.form-hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+textarea.form-control { resize: vertical; min-height: 80px; }
+
+/* EDITOR */
+.editor-wrap { border: 1.5px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.editor-toolbar { display: flex; gap: 4px; padding: 8px 12px; background: #f5f8f6; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+.toolbar-btn { padding: 4px 10px; border: 1px solid var(--border); border-radius: 6px; background: white; font-size: 13px; cursor: pointer; transition: all 0.15s; }
+.toolbar-btn:hover { background: var(--green); color: white; border-color: var(--green); }
+#editor-content { width: 100%; min-height: 320px; padding: 16px; border: none; font-size: 15px; line-height: 1.7; font-family: inherit; resize: vertical; }
+#editor-content:focus { outline: none; }
+.editor-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); background: #f5f8f6; }
+.editor-tab { padding: 8px 16px; font-size: 13px; cursor: pointer; border: none; background: none; color: var(--muted); border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.editor-tab.active { color: var(--green); border-bottom-color: var(--green); font-weight: 600; background: white; }
+#editor-preview { padding: 16px; min-height: 320px; line-height: 1.7; display: none; }
+#editor-preview h1,#editor-preview h2,#editor-preview h3 { color: var(--green); margin: 20px 0 10px; }
+#editor-preview p { margin-bottom: 12px; }
+#editor-preview ul,#editor-preview ol { padding-left: 24px; margin-bottom: 12px; }
+
+/* IMAGES */
+.image-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.image-item { border-radius: var(--radius); overflow: hidden; border: 2px solid var(--border); transition: border 0.2s; }
+.image-item:hover { border-color: var(--green); }
+.image-thumb { width: 100%; aspect-ratio: 1; object-fit: cover; display: block; }
+.image-name { padding: 8px 10px; font-size: 11px; color: var(--muted); word-break: break-all; }
+.image-actions { padding: 0 10px 8px; display: flex; gap: 6px; }
+.upload-zone { border: 2px dashed var(--border); border-radius: var(--radius); padding: 40px; text-align: center; cursor: pointer; transition: all 0.2s; }
+.upload-zone:hover, .upload-zone.drag { border-color: var(--green); background: #f0f9f4; }
+.upload-zone .icon { font-size: 40px; margin-bottom: 12px; }
+.upload-zone p { color: var(--muted); font-size: 14px; }
+.upload-zone strong { color: var(--green); }
+#file-input { display: none; }
+
+/* DASHBOARD */
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 28px; }
+.stat-card { background: white; border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+.stat-num { font-size: 36px; font-weight: 800; color: var(--green); }
+.stat-label { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.stat-icon { font-size: 28px; float: right; }
+
+/* ALERT */
+.alert { padding: 12px 16px; border-radius: var(--radius); font-size: 14px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+.alert-success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+.alert-error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+.alert-info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+
+/* TOAST */
+#toast { position: fixed; bottom: 24px; right: 24px; background: #1C5A3A; color: white; padding: 14px 24px; border-radius: var(--radius); font-size: 14px; font-weight: 500; z-index: 9999; display: none; box-shadow: 0 4px 20px rgba(0,0,0,0.2); max-width: 380px; }
+#toast.error { background: var(--danger); }
+#toast.show { display: block; animation: slideUp 0.3s ease; }
+@keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* SPINNER */
+.spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3); border-top-color: white; border-radius: 50%; animation: spin 0.6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading { text-align: center; padding: 48px; color: var(--muted); }
+.loading .spinner { width: 32px; height: 32px; border-color: rgba(28,90,58,0.2); border-top-color: var(--green); margin: 0 auto 12px; display: block; }
+
+/* MODAL */
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 500; display: none; align-items: center; justify-content: center; }
+.modal-overlay.show { display: flex; }
+.modal { background: white; border-radius: 16px; padding: 32px; max-width: 480px; width: 90%; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+.modal-title { font-size: 20px; font-weight: 700; color: var(--green); margin-bottom: 12px; }
+.modal-body { color: var(--muted); font-size: 14px; margin-bottom: 24px; line-height: 1.6; }
+.modal-footer { display: flex; gap: 12px; justify-content: flex-end; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .form-row { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .sidebar { transform: translateX(-100%); }
+  .main { margin-left: 0; padding: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="login-page">
+  <div class="login-box">
+    <div class="login-logo">CHANFER<span>PACK</span></div>
+    <div class="login-sub">网站管理后台 · Admin Panel</div>
+    <button class="btn-github" id="login-btn">
+      <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      使用 GitHub 账号登录
+    </button>
+    <div id="token-login" style="margin-top:20px">
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">或输入 GitHub Personal Access Token 登录：</div>
+      <input type="password" id="token-input" class="form-control" placeholder="ghp_xxxxxxxxxxxx" style="margin-bottom:8px">
+      <button class="btn btn-primary" style="width:100%" onclick="loginWithToken()">Token 登录</button>
+    </div>
+    <div class="login-note">
+      🔒 登录信息仅存于本地浏览器，不经过任何第三方服务器<br>
+      需要 GitHub 账号 <strong>sarahqi520</strong> 的权限才可访问
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      CHANFER<span>PACK</span>
+      <span class="sidebar-sub">网站管理后台</span>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-item active" onclick="showPage('dashboard')" id="nav-dashboard">
+        <span class="icon">📊</span> 控制台
+      </button>
+      <button class="nav-item" onclick="showPage('blog')" id="nav-blog">
+        <span class="icon">📝</span> 博客文章
+      </button>
+      <button class="nav-item" onclick="showPage('new-blog')" id="nav-new-blog">
+        <span class="icon">✏️</span> 写新文章
+      </button>
+      <button class="nav-item" onclick="showPage('images')" id="nav-images">
+        <span class="icon">🖼️</span> 图片管理
+      </button>
+      <button class="nav-item" onclick="showPage('deploy')" id="nav-deploy">
+        <span class="icon">🚀</span> 发布状态
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="user-info">
+        <img class="user-avatar" id="user-avatar" src="" alt="">
+        <span class="user-name" id="user-name">-</span>
+        <button class="btn-logout" onclick="logout()">退出</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main">
+    <div id="alert-area"></div>
+
+    <!-- DASHBOARD -->
+    <div id="page-dashboard">
+      <div class="page-header">
+        <div class="page-title">控制台 <small>chanferpack.com</small></div>
+        <a href="https://chanferpack.com" target="_blank" class="btn btn-secondary">🔗 查看网站</a>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><span class="stat-icon">📝</span><div class="stat-num" id="stat-posts">-</div><div class="stat-label">博客文章</div></div>
+        <div class="stat-card"><span class="stat-icon">📦</span><div class="stat-num" id="stat-solutions">5</div><div class="stat-label">产品方案页</div></div>
+        <div class="stat-card"><span class="stat-icon">🖼️</span><div class="stat-num" id="stat-images">-</div><div class="stat-label">图片文件</div></div>
+        <div class="stat-card"><span class="stat-icon">🌐</span><div class="stat-num">7</div><div class="stat-label">语言版本</div></div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span style="font-weight:600">快速操作</span></div>
+        <div class="card-body" style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="showPage('new-blog')">✏️ 写新文章</button>
+          <button class="btn btn-secondary" onclick="showPage('images')">🖼️ 上传图片</button>
+          <a href="https://chanferpack.com/blog/" target="_blank" class="btn btn-secondary">📖 查看博客</a>
+          <a href="https://github.com/sarahqi520/chanferpack-website/actions" target="_blank" class="btn btn-secondary">⚙️ 部署记录</a>
+        </div>
+      </div>
+      <div class="card" style="margin-top:20px">
+        <div class="card-header"><span style="font-weight:600">最近文章</span></div>
+        <div class="card-body" id="recent-posts"><div class="loading"><div class="spinner"></div>加载中...</div></div>
+      </div>
+    </div>
+
+    <!-- BLOG LIST -->
+    <div id="page-blog" style="display:none">
+      <div class="page-header">
+        <div class="page-title">博客文章</div>
+        <button class="btn btn-primary" onclick="showPage('new-blog')">✏️ 写新文章</button>
+      </div>
+      <div class="card">
+        <div class="card-body table-wrap" id="blog-list"><div class="loading"><div class="spinner"></div>加载中...</div></div>
+      </div>
+    </div>
+
+    <!-- NEW / EDIT BLOG -->
+    <div id="page-new-blog" style="display:none">
+      <div class="page-header">
+        <div class="page-title" id="editor-page-title">✏️ 写新文章</div>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-secondary" onclick="showPage('blog')">← 返回</button>
+          <button class="btn btn-primary" id="publish-btn" onclick="publishPost()">🚀 发布文章</button>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 340px;gap:20px">
+        <div>
+          <div class="card" style="margin-bottom:20px">
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">文章标题 <span class="required">*</span></label>
+                <input type="text" id="post-title" class="form-control" placeholder="例：Nigeria Detergent Market: A 2026 Investment Guide">
+              </div>
+              <div class="form-group">
+                <label class="form-label">文章正文 <span class="required">*</span><span style="float:right;font-weight:400;font-size:12px;color:var(--muted)">支持 Markdown 和 HTML</span></label>
+                <div class="editor-wrap">
+                  <div class="editor-tabs">
+                    <button class="editor-tab active" onclick="switchTab('write')">✏️ 编辑</button>
+                    <button class="editor-tab" onclick="switchTab('preview')">👁 预览</button>
+                  </div>
+                  <div class="editor-toolbar">
+                    <button class="toolbar-btn" onclick="insertMd('**','**')" title="粗体"><b>B</b></button>
+                    <button class="toolbar-btn" onclick="insertMd('*','*')" title="斜体"><i>I</i></button>
+                    <button class="toolbar-btn" onclick="insertMd('\n## ','')">H2</button>
+                    <button class="toolbar-btn" onclick="insertMd('\n### ','')">H3</button>
+                    <button class="toolbar-btn" onclick="insertMd('\n- ','')">列表</button>
+                    <button class="toolbar-btn" onclick="insertMd('\n> ','')">引用</button>
+                    <button class="toolbar-btn" onclick="insertLink()">链接</button>
+                    <button class="toolbar-btn" onclick="insertMd('\n---\n','')">分割线</button>
+                  </div>
+                  <textarea id="editor-content" class="form-control" placeholder="在这里写文章内容...&#10;&#10;支持 Markdown 格式：&#10;## 二级标题&#10;**粗体** *斜体*&#10;- 列表项&#10;&#10;或直接写 HTML 也可以。" oninput="updateWordCount()"></textarea>
+                  <div id="editor-preview"></div>
+                </div>
+                <div style="text-align:right;font-size:12px;color:var(--muted);margin-top:4px">字数：<span id="word-count">0</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="card-header"><span style="font-weight:600">文章设置</span></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">文件名（URL slug）<span class="required">*</span></label>
+                <div style="display:flex;align-items:center;gap:4px">
+                  <span style="font-size:12px;color:var(--muted);white-space:nowrap">/blog/</span>
+                  <input type="text" id="post-slug" class="form-control" placeholder="my-article-title">
+                  <span style="font-size:12px;color:var(--muted);white-space:nowrap">.html</span>
+                </div>
+                <div class="form-hint">只能用英文小写、数字、连字符</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">发布日期</label>
+                <input type="date" id="post-date" class="form-control">
+              </div>
+              <div class="form-group">
+                <label class="form-label">文章分类</label>
+                <select id="post-category" class="form-control">
+                  <option value="MARKET TRENDS">市场趋势 (Market Trends)</option>
+                  <option value="TECHNICAL GUIDE">技术指南 (Technical Guide)</option>
+                  <option value="CASE STUDY">案例研究 (Case Study)</option>
+                  <option value="INDUSTRY NEWS">行业新闻 (Industry News)</option>
+                  <option value="PRODUCT UPDATE">产品更新 (Product Update)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">作者</label>
+                <input type="text" id="post-author" class="form-control" value="CHANFER Insights Team">
+              </div>
+            </div>
+          </div>
+          <div class="card" style="margin-bottom:16px">
+            <div class="card-header"><span style="font-weight:600">SEO 设置</span></div>
+            <div class="card-body">
+              <div class="form-group">
+                <label class="form-label">Meta 描述</label>
+                <textarea id="post-description" class="form-control" rows="3" placeholder="150字以内，会显示在 Google 搜索结果中"></textarea>
+                <div class="form-hint"><span id="desc-count">0</span>/160 字符</div>
+              </div>
+              <div class="form-group">
+                <label class="form-label">关键词</label>
+                <input type="text" id="post-keywords" class="form-control" placeholder="用英文逗号分隔">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IMAGE MANAGER -->
+    <div id="page-images" style="display:none">
+      <div class="page-header">
+        <div class="page-title">图片管理</div>
+      </div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-header"><span style="font-weight:600">上传新图片</span></div>
+        <div class="card-body">
+          <div class="upload-zone" id="upload-zone" onclick="document.getElementById('file-input').click()" ondragover="dragOver(event)" ondrop="dropFile(event)" ondragleave="dragLeave()">
+            <div class="icon">📤</div>
+            <p><strong>点击选择图片</strong>，或将图片拖放到此处</p>
+            <p style="margin-top:8px;font-size:12px">支持 JPG、PNG、WebP、SVG · 建议宽度 1200px 以上</p>
+          </div>
+          <input type="file" id="file-input" accept="image/*" multiple onchange="uploadImages(this.files)">
+          <div id="upload-progress" style="margin-top:12px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header">
+          <span style="font-weight:600">图片库 <span id="img-count" style="font-weight:400;color:var(--muted)"></span></span>
+          <button class="btn btn-secondary btn-sm" onclick="loadImages()">🔄 刷新</button>
+        </div>
+        <div class="card-body">
+          <div class="image-grid" id="image-grid"><div class="loading"><div class="spinner"></div>加载中...</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DEPLOY STATUS -->
+    <div id="page-deploy" style="display:none">
+      <div class="page-header">
+        <div class="page-title">发布状态</div>
+        <button class="btn btn-secondary" onclick="loadDeployStatus()">🔄 刷新</button>
+      </div>
+      <div class="card" style="margin-bottom:20px">
+        <div class="card-body" style="display:flex;align-items:center;gap:20px">
+          <div style="font-size:40px" id="deploy-icon">⏳</div>
+          <div>
+            <div style="font-size:18px;font-weight:700;color:var(--green)" id="deploy-status">加载中...</div>
+            <div style="font-size:14px;color:var(--muted)" id="deploy-time"></div>
+          </div>
+          <a href="https://dash.cloudflare.com" target="_blank" class="btn btn-secondary" style="margin-left:auto">🔗 Cloudflare 控制台</a>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span style="font-weight:600">最近 Git 提交记录</span></div>
+        <div class="card-body table-wrap" id="commits-list"><div class="loading"><div class="spinner"></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM MODAL -->
+<div class="modal-overlay" id="confirm-modal">
+  <div class="modal">
+    <div class="modal-title" id="confirm-title">确认操作</div>
+    <div class="modal-body" id="confirm-body"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+      <button class="btn btn-danger" id="confirm-ok">确认</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ============================================================
+// CONFIG
+// ============================================================
+const REPO_OWNER = 'sarahqi520';
+const REPO_NAME  = 'chanferpack-website';
+const REPO_BRANCH = 'main';
+const SITE_URL   = 'https://www.chanferpack.com';
+
+// ============================================================
+// AUTH
+// ============================================================
+let githubToken = localStorage.getItem('chanfer_admin_token') || '';
+
+function loginWithToken() {
+  const t = document.getElementById('token-input').value.trim();
+  if (!t) { toast('请输入 Token', 'error'); return; }
+  githubToken = t;
+  localStorage.setItem('chanfer_admin_token', t);
+  verifyAndLogin();
+}
+
+document.getElementById('login-btn').onclick = function() {
+  // If token already saved, try it
+  if (githubToken) { verifyAndLogin(); return; }
+  toast('请使用下方 Token 方式登录', 'info');
+};
+
+async function verifyAndLogin() {
+  try {
+    const res = await ghApi('GET', '/user');
+    if (res.login) {
+      document.getElementById('user-name').textContent = res.name || res.login;
+      document.getElementById('user-avatar').src = res.avatar_url;
+      document.getElementById('login-page').style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadDashboard();
+    }
+  } catch(e) {
+    toast('Token 无效或已过期，请重新输入', 'error');
+    localStorage.removeItem('chanfer_admin_token');
+  }
+}
+
+function logout() {
+  localStorage.removeItem('chanfer_admin_token');
+  location.reload();
+}
+
+// ============================================================
+// GITHUB API
+// ============================================================
+async function ghApi(method, path, body) {
+  const url = path.startsWith('http') ? path : `https://api.github.com${path}`;
+  const opts = {
+    method,
+    headers: {
+      'Authorization': `token ${githubToken}`,
+      'Accept': 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+async function ghGetFile(path) {
+  const data = await ghApi('GET', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${REPO_BRANCH}`);
+  return { content: atob(data.content.replace(/\n/g, '')), sha: data.sha };
+}
+
+async function ghPutFile(path, content, message, sha) {
+  const body = {
+    message,
+    content: btoa(unescape(encodeURIComponent(content))),
+    branch: REPO_BRANCH
+  };
+  if (sha) body.sha = sha;
+  return ghApi('PUT', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, body);
+}
+
+async function ghDeleteFile(path, sha, message) {
+  return ghApi('DELETE', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`, {
+    message,
+    sha,
+    branch: REPO_BRANCH
+  });
+}
+
+async function ghListDir(path) {
+  return ghApi('GET', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${REPO_BRANCH}`);
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showPage(name) {
+  ['dashboard','blog','new-blog','images','deploy'].forEach(p => {
+    document.getElementById(`page-${p}`).style.display = 'none';
+    const n = document.getElementById(`nav-${p}`);
+    if (n) n.classList.remove('active');
+  });
+  document.getElementById(`page-${name}`).style.display = 'block';
+  const n = document.getElementById(`nav-${name}`);
+  if (n) n.classList.add('active');
+  document.getElementById('alert-area').innerHTML = '';
+
+  if (name === 'dashboard') loadDashboard();
+  else if (name === 'blog') loadBlogList();
+  else if (name === 'new-blog') initNewPost();
+  else if (name === 'images') loadImages();
+  else if (name === 'deploy') loadDeployStatus();
+}
+
+// ============================================================
+// DASHBOARD
+// ============================================================
+async function loadDashboard() {
+  try {
+    const files = await ghListDir('blog');
+    const posts = files.filter(f => f.name.endsWith('.html') && f.name !== 'index.html');
+    document.getElementById('stat-posts').textContent = posts.length;
+
+    const imgFiles = await ghListDir('images');
+    document.getElementById('stat-images').textContent = imgFiles.filter(f => /\.(jpg|jpeg|png|webp|svg|gif)$/i.test(f.name)).length;
+
+    // Show recent posts
+    const recentHtml = posts.slice(-5).reverse().map(f => `
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--border)">
+        <div>
+          <div style="font-weight:600;font-size:14px">${f.name.replace('.html','')}</div>
+          <div style="font-size:12px;color:var(--muted)">/blog/${f.name}</div>
+        </div>
+        <div style="display:flex;gap:8px">
+          <a href="${SITE_URL}/blog/${f.name}" target="_blank" class="btn btn-secondary btn-sm">查看</a>
+          <button class="btn btn-primary btn-sm" onclick="editPost('${f.name}')">编辑</button>
+        </div>
+      </div>`).join('');
+    document.getElementById('recent-posts').innerHTML = recentHtml || '<p style="color:var(--muted)">暂无文章</p>';
+  } catch(e) {
+    document.getElementById('recent-posts').innerHTML = `<div class="alert alert-error">⚠️ 加载失败: ${e.message}</div>`;
+  }
+}
+
+// ============================================================
+// BLOG LIST
+// ============================================================
+async function loadBlogList() {
+  const el = document.getElementById('blog-list');
+  el.innerHTML = '<div class="loading"><div class="spinner"></div>加载中...</div>';
+  try {
+    const files = await ghListDir('blog');
+    const posts = files.filter(f => f.name.endsWith('.html') && f.name !== 'index.html');
+    document.getElementById('stat-posts').textContent = posts.length;
+
+    if (!posts.length) { el.innerHTML = '<p style="color:var(--muted);padding:20px">还没有文章，点击右上角"写新文章"开始吧！</p>'; return; }
+
+    el.innerHTML = `<table>
+      <thead><tr><th>文章文件名</th><th>页面地址</th><th>操作</th></tr></thead>
+      <tbody>${posts.map(f => `
+        <tr>
+          <td><strong>${f.name}</strong></td>
+          <td><a href="${SITE_URL}/blog/${f.name}" target="_blank" style="color:var(--green);font-size:13px">/blog/${f.name} ↗</a></td>
+          <td><div class="actions">
+            <button class="btn btn-secondary btn-sm" onclick="editPost('${f.name}')">✏️ 编辑</button>
+            <button class="btn btn-danger btn-sm" onclick="confirmDelete('${f.name}','${f.sha}')">🗑 删除</button>
+          </div></td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  } catch(e) {
+    el.innerHTML = `<div class="alert alert-error">⚠️ 加载失败: ${e.message}</div>`;
+  }
+}
+
+// ============================================================
+// EDITOR
+// ============================================================
+let editingSha = null;
+let editingFile = null;
+
+function initNewPost() {
+  editingSha = null;
+  editingFile = null;
+  document.getElementById('editor-page-title').textContent = '✏️ 写新文章';
+  document.getElementById('publish-btn').textContent = '🚀 发布文章';
+  document.getElementById('post-title').value = '';
+  document.getElementById('post-slug').value = '';
+  document.getElementById('post-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('post-category').value = 'MARKET TRENDS';
+  document.getElementById('post-author').value = 'CHANFER Insights Team';
+  document.getElementById('post-description').value = '';
+  document.getElementById('post-keywords').value = '';
+  document.getElementById('editor-content').value = '';
+  updateWordCount();
+}
+
+async function editPost(filename) {
+  showPage('new-blog');
+  document.getElementById('editor-page-title').textContent = `✏️ 编辑文章`;
+  document.getElementById('publish-btn').textContent = '💾 保存更改';
+  editingFile = `blog/${filename}`;
+  toast('正在加载文章内容...', 'info');
+  try {
+    const { content, sha } = await ghGetFile(editingFile);
+    editingSha = sha;
+    // Extract key fields from HTML
+    const title = (content.match(/<title>(.*?)<\/title>/) || [])[1]?.replace(' | CHANFER','') || '';
+    const desc = (content.match(/name="description" content="(.*?)"/) || [])[1] || '';
+    const keywords = (content.match(/name="keywords" content="(.*?)"/) || [])[1] || '';
+    const slug = filename.replace('.html','');
+    const dateMatch = content.match(/datePublished":\s*"(\d{4}-\d{2}-\d{2})"/) || content.match(/📅 ([\w]+ \d+, \d{4})/);
+
+    document.getElementById('post-title').value = title;
+    document.getElementById('post-slug').value = slug;
+    document.getElementById('post-description').value = desc;
+    document.getElementById('post-keywords').value = keywords;
+
+    // Extract article body
+    const bodyMatch = content.match(/<article[^>]*>([\s\S]*?)<\/article>/);
+    if (bodyMatch) {
+      document.getElementById('editor-content').value = bodyMatch[1].trim();
+    } else {
+      document.getElementById('editor-content').value = content;
+    }
+    updateWordCount();
+    toast('文章加载成功', 'success');
+  } catch(e) {
+    toast('加载失败: ' + e.message, 'error');
+  }
+}
+
+function switchTab(tab) {
+  document.querySelectorAll('.editor-tab').forEach(t => t.classList.remove('active'));
+  if (tab === 'write') {
+    document.querySelector('.editor-tab').classList.add('active');
+    document.getElementById('editor-content').style.display = 'block';
+    document.getElementById('editor-preview').style.display = 'none';
+  } else {
+    document.querySelectorAll('.editor-tab')[1].classList.add('active');
+    document.getElementById('editor-content').style.display = 'none';
+    const preview = document.getElementById('editor-preview');
+    preview.style.display = 'block';
+    const raw = document.getElementById('editor-content').value;
+    // If content looks like Markdown, render it; otherwise show as-is
+    if (raw.includes('<') && raw.includes('>')) {
+      preview.innerHTML = raw;
+    } else {
+      preview.innerHTML = typeof marked !== 'undefined' ? marked.parse(raw) : raw;
+    }
+  }
+}
+
+function insertMd(before, after) {
+  const t = document.getElementById('editor-content');
+  const s = t.selectionStart, e = t.selectionEnd;
+  const sel = t.value.substring(s, e);
+  t.value = t.value.substring(0, s) + before + sel + after + t.value.substring(e);
+  t.focus();
+  t.selectionStart = s + before.length;
+  t.selectionEnd = s + before.length + sel.length;
+  updateWordCount();
+}
+
+function insertLink() {
+  const url = prompt('输入链接地址：', 'https://');
+  const text = prompt('显示文字：', '点击查看');
+  if (url && text) insertMd(`[${text}](${url})`, '');
+}
+
+function updateWordCount() {
+  const v = document.getElementById('editor-content').value;
+  document.getElementById('word-count').textContent = v.replace(/<[^>]+>/g,'').trim().split(/\s+/).filter(Boolean).length;
+  const desc = document.getElementById('post-description').value;
+  document.getElementById('desc-count').textContent = desc.length;
+}
+
+document.getElementById('post-title').addEventListener('input', function() {
+  if (!editingFile) {
+    const slug = this.value.toLowerCase()
+      .replace(/[^a-z0-9\s-]/g, '')
+      .replace(/\s+/g, '-').replace(/-+/g, '-').substring(0, 60);
+    document.getElementById('post-slug').value = slug;
+  }
+});
+document.getElementById('post-description').addEventListener('input', updateWordCount);
+
+// ============================================================
+// GENERATE & PUBLISH
+// ============================================================
+function generateHTML(data) {
+  const { title, slug, date, category, author, description, keywords, body } = data;
+  const canonicalUrl = `${SITE_URL}/blog/${slug}.html`;
+  const dateFormatted = new Date(date).toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  const readTime = Math.ceil(body.replace(/<[^>]+>/g,'').split(/\s+/).length / 200);
+
+  // Convert markdown body to HTML if needed
+  let bodyHtml = body;
+  if (!body.trim().startsWith('<')) {
+    bodyHtml = typeof marked !== 'undefined' ? marked.parse(body) : body;
+    // Apply CHANFER styling to headings
+    bodyHtml = bodyHtml
+      .replace(/<h2>/g, '<h2 style="color:#1C5A3A;font-size:32px;margin-top:48px">')
+      .replace(/<h3>/g, '<h3 style="color:#1C5A3A;font-size:24px;margin-top:32px">')
+      .replace(/<p>/g, '<p style="margin-bottom:16px">')
+      .replace(/<ul>/g, '<ul style="margin:24px 0;padding-left:32px">')
+      .replace(/<li>/g, '<li style="margin-bottom:12px">');
+  }
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) - GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7012780HL3"><\/script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7012780HL3');
+  <\/script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="preload" href="../css/style.css" as="style">
+
+  <meta property="og:title" content="${title} | CHANFER">
+  <meta property="og:description" content="${description}">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="${canonicalUrl}">
+  <meta property="og:image" content="${SITE_URL}/images/og-default.jpg">
+  <meta property="og:locale" content="en_US">
+
+  <link rel="canonical" href="${canonicalUrl}">
+  <link rel="alternate" hreflang="en" href="${canonicalUrl}">
+
+  <title>${title} | CHANFER</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="${description}">
+  <meta name="keywords" content="${keywords}">
+  <meta name="robots" content="index, follow">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": "${title}",
+    "description": "${description}",
+    "author": { "@type": "Organization", "name": "CHANFER" },
+    "publisher": { "@type": "Organization", "name": "CHANFER", "logo": { "@type": "ImageObject", "url": "${SITE_URL}/images/logo.svg" } },
+    "datePublished": "${date}",
+    "dateModified": "${date}",
+    "image": "${SITE_URL}/images/og-default.jpg",
+    "articleSection": "${category}",
+    "wordCount": ${body.replace(/<[^>]+>/g,'').split(/\s+/).filter(Boolean).length}
+  }
+  <\/script>
+
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/solution.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-container">
+    <a href="../index.html" class="logo">
+      <img src="../images/logo.svg" alt="CHANFER" height="44" style="height:44px; width:auto;">
+    </a>
+    <nav class="nav-menu" id="navMenu">
+      <div class="nav-dropdown">
+        <a href="../solutions/index.html" class="nav-link">Solutions ▾</a>
+        <div class="dropdown-menu">
+          <a href="../solutions/bottle-line.html">🧴 Bottle Line</a>
+          <a href="../solutions/pouch-line.html">📦 Pouch Line</a>
+          <a href="../solutions/drum-line.html">🛢️ Drum Line</a>
+        </div>
+      </div>
+      <a href="../industries/index.html" class="nav-link">Industries</a>
+      <a href="../equipment/index.html" class="nav-link">Equipment</a>
+      <a href="../projects/index.html" class="nav-link">Global Projects</a>
+      <a href="../guides/index.html" class="nav-link">Guides</a>
+      <a href="index.html" class="nav-link">Blog</a>
+      <a href="../about.html" class="nav-link">About</a>
+    </nav>
+    <div class="nav-right">
+      <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Language">
+        <option value="../index.html" selected>🌐 English</option>
+        <option value="../ru/">🌐 RU</option>
+      </select>
+      <a href="../contact.html" class="nav-cta">Get a Quote</a>
+    </div>
+  </div>
+</header>
+
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <ol itemscope itemtype="https://schema.org/BreadcrumbList">
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="../index.html"><span itemprop="name">Home</span></a>
+      <meta itemprop="position" content="1">
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="index.html"><span itemprop="name">Blog</span></a>
+      <meta itemprop="position" content="2">
+    </li>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem" aria-current="page">
+      <span itemprop="name">${title}</span>
+      <meta itemprop="position" content="3">
+    </li>
+  </ol>
+</nav>
+
+<article style="max-width:800px;margin:0 auto;padding:40px 20px;font-size:18px;line-height:1.8;color:#333">
+
+  <header style="margin-bottom:40px;text-align:center">
+    <div style="display:inline-block;background:#1C5A3A;color:#FFC83C;padding:6px 16px;border-radius:20px;font-size:14px;font-weight:600;margin-bottom:16px">📈 ${category}</div>
+    <h1 style="font-size:42px;line-height:1.2;color:#1C5A3A;margin:0 0 16px 0">${title}</h1>
+    <div style="color:#666;font-size:16px">
+      <span>📅 ${dateFormatted}</span> · <span>⏱️ ${readTime} min read</span> · <span>✍️ ${author}</span>
+    </div>
+  </header>
+
+${bodyHtml}
+
+  <div style="margin-top:48px;padding:40px;background:linear-gradient(135deg,#1C5A3A,#0d3624);color:white;border-radius:12px;text-align:center">
+    <h3 style="color:white;margin:0 0 16px 0;font-size:28px">Ready to Get Started?</h3>
+    <p style="margin:0 0 24px 0;font-size:18px;opacity:0.95">Contact CHANFER for a customized packaging line solution and free consultation.</p>
+    <a href="../contact.html" class="cta-button" style="background:#FFC83C;color:#1C5A3A;padding:16px 40px;border-radius:8px;font-weight:700;display:inline-block;text-decoration:none;font-size:18px">Get a Free Quote →</a>
+  </div>
+
+</article>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>CHANFER</h4>
+        <p>Guangzhou Chanfer Intelligent Equipment Co., Ltd.</p>
+        <p>7th Floor, Room 701, Dongjun Kechuang Park, No.5 Yongfeng Road, Shawan Street, Panyu District, Guangzhou, China</p>
+        <p>📞 +86 191 2880 3719<br>✉️ info@gzchanfer.com</p>
+      </div>
+      <div class="footer-col">
+        <h4>Solutions</h4>
+        <a href="../solutions/bottle-line.html">Bottle Line</a>
+        <a href="../solutions/pouch-line.html">Pouch Line</a>
+        <a href="../solutions/drum-line.html">Drum Line</a>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <a href="index.html">Blog</a>
+        <a href="../guides/index.html">Buyer's Guides</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="friendly-links">
+      <span class="friendly-links-label">Friendly Links · 友情链接</span>
+      <a href="https://www.gzchanfer.com" target="_blank" rel="noopener">CHANFER (Main Site · 广州长发)</a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Guangzhou Chanfer Intelligent Equipment Co., Ltd. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js" defer><\/script>
+</body>
+</html>`;
+}
+
+async function publishPost() {
+  const title = document.getElementById('post-title').value.trim();
+  const slug  = document.getElementById('post-slug').value.trim();
+  const body  = document.getElementById('editor-content').value.trim();
+  const description = document.getElementById('post-description').value.trim();
+  const keywords = document.getElementById('post-keywords').value.trim();
+  const date  = document.getElementById('post-date').value;
+  const category = document.getElementById('post-category').value;
+  const author = document.getElementById('post-author').value.trim();
+
+  if (!title) { toast('请输入文章标题', 'error'); return; }
+  if (!slug)  { toast('请输入 URL 文件名', 'error'); return; }
+  if (!body)  { toast('请输入文章内容', 'error'); return; }
+  if (!/^[a-z0-9-]+$/.test(slug)) { toast('文件名只能包含英文小写字母、数字和连字符', 'error'); return; }
+
+  const btn = document.getElementById('publish-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> 发布中...';
+
+  try {
+    const html = generateHTML({ title, slug, date, category, author, description, keywords, body });
+    const filePath = `blog/${slug}.html`;
+    const msg = editingFile ? `update(blog): 编辑文章 ${slug}` : `feat(blog): 新增文章 ${slug}`;
+    await ghPutFile(filePath, html, msg, editingSha || null);
+
+    toast(`✅ 文章已发布！约 1 分钟后在网站上线`, 'success');
+    setTimeout(() => showPage('blog'), 1500);
+  } catch(e) {
+    toast('发布失败: ' + e.message, 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = editingFile ? '💾 保存更改' : '🚀 发布文章';
+  }
+}
+
+// ============================================================
+// IMAGES
+// ============================================================
+async function loadImages() {
+  const grid = document.getElementById('image-grid');
+  grid.innerHTML = '<div class="loading"><div class="spinner"></div>加载中...</div>';
+  try {
+    const files = await ghListDir('images');
+    const imgs = files.filter(f => /\.(jpg|jpeg|png|webp|svg|gif)$/i.test(f.name));
+    document.getElementById('img-count').textContent = `(${imgs.length} 张)`;
+    document.getElementById('stat-images').textContent = imgs.length;
+
+    if (!imgs.length) { grid.innerHTML = '<p style="color:var(--muted)">暂无图片</p>'; return; }
+    grid.innerHTML = imgs.map(f => `
+      <div class="image-item">
+        <img class="image-thumb" src="${f.download_url}" alt="${f.name}" loading="lazy">
+        <div class="image-name">${f.name}</div>
+        <div class="image-actions">
+          <button class="btn btn-secondary btn-sm" style="flex:1" onclick="copyUrl('${SITE_URL}/images/${f.name}')">复制链接</button>
+          <button class="btn btn-danger btn-sm" onclick="confirmDeleteImg('${f.name}','${f.sha}')">删</button>
+        </div>
+      </div>`).join('');
+  } catch(e) {
+    grid.innerHTML = `<div class="alert alert-error">⚠️ 加载失败: ${e.message}</div>`;
+  }
+}
+
+function copyUrl(url) {
+  navigator.clipboard.writeText(url).then(() => toast('链接已复制: ' + url));
+}
+
+function dragOver(e) { e.preventDefault(); document.getElementById('upload-zone').classList.add('drag'); }
+function dragLeave() { document.getElementById('upload-zone').classList.remove('drag'); }
+function dropFile(e) { e.preventDefault(); dragLeave(); uploadImages(e.dataTransfer.files); }
+
+async function uploadImages(files) {
+  const prog = document.getElementById('upload-progress');
+  for (const file of files) {
+    if (!file.type.startsWith('image/')) continue;
+    prog.innerHTML = `<div class="alert alert-info">⏳ 正在上传 ${file.name}...</div>`;
+    try {
+      const reader = new FileReader();
+      const b64 = await new Promise(r => { reader.onload = e => r(e.target.result.split(',')[1]); reader.readAsDataURL(file); });
+      // Check if file exists
+      let sha = null;
+      try { const existing = await ghApi('GET', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/images/${file.name}?ref=${REPO_BRANCH}`); sha = existing.sha; } catch{}
+      await ghApi('PUT', `/repos/${REPO_OWNER}/${REPO_NAME}/contents/images/${file.name}`, {
+        message: `upload(images): ${file.name}`,
+        content: b64,
+        branch: REPO_BRANCH,
+        ...(sha ? { sha } : {})
+      });
+      prog.innerHTML = `<div class="alert alert-success">✅ ${file.name} 上传成功！</div>`;
+      loadImages();
+    } catch(e) {
+      prog.innerHTML = `<div class="alert alert-error">❌ ${file.name} 上传失败: ${e.message}</div>`;
+    }
+  }
+}
+
+// ============================================================
+// DEPLOY
+// ============================================================
+async function loadDeployStatus() {
+  document.getElementById('deploy-status').textContent = '加载中...';
+  document.getElementById('commits-list').innerHTML = '<div class="loading"><div class="spinner"></div></div>';
+  try {
+    const commits = await ghApi('GET', `/repos/${REPO_OWNER}/${REPO_NAME}/commits?branch=${REPO_BRANCH}&per_page=10`);
+    const latest = commits[0];
+    const msg = latest.commit.message.split('\n')[0];
+    const timeAgo = getTimeAgo(latest.commit.committer.date);
+
+    document.getElementById('deploy-icon').textContent = '✅';
+    document.getElementById('deploy-status').textContent = '最新代码已推送，Cloudflare 自动部署中';
+    document.getElementById('deploy-time').textContent = `最近提交: ${timeAgo} · ${msg}`;
+
+    document.getElementById('commits-list').innerHTML = `<table>
+      <thead><tr><th>提交信息</th><th>时间</th><th>作者</th></tr></thead>
+      <tbody>${commits.map(c => `
+        <tr>
+          <td><code style="font-size:12px;color:var(--green)">${c.sha.substring(0,7)}</code> ${c.commit.message.split('\n')[0]}</td>
+          <td style="font-size:13px;color:var(--muted)">${getTimeAgo(c.commit.committer.date)}</td>
+          <td style="font-size:13px">${c.commit.author.name}</td>
+        </tr>`).join('')}
+      </tbody></table>`;
+  } catch(e) {
+    document.getElementById('deploy-status').textContent = '加载失败: ' + e.message;
+  }
+}
+
+function getTimeAgo(dateStr) {
+  const d = new Date(dateStr), now = new Date();
+  const diff = Math.round((now - d) / 1000);
+  if (diff < 60) return `${diff} 秒前`;
+  if (diff < 3600) return `${Math.round(diff/60)} 分钟前`;
+  if (diff < 86400) return `${Math.round(diff/3600)} 小时前`;
+  return `${Math.round(diff/86400)} 天前`;
+}
+
+// ============================================================
+// DELETE
+// ============================================================
+let _deleteCallback = null;
+
+function confirmDelete(filename, sha) {
+  document.getElementById('confirm-title').textContent = '确认删除文章';
+  document.getElementById('confirm-body').textContent = `确定要删除文章 "${filename}" 吗？此操作不可撤销，文章将从网站上永久移除。`;
+  document.getElementById('confirm-modal').classList.add('show');
+  _deleteCallback = async () => {
+    try {
+      await ghDeleteFile(`blog/${filename}`, sha, `delete(blog): 删除文章 ${filename}`);
+      toast('文章已删除', 'success');
+      loadBlogList();
+    } catch(e) { toast('删除失败: ' + e.message, 'error'); }
+    closeModal();
+  };
+  document.getElementById('confirm-ok').onclick = _deleteCallback;
+}
+
+function confirmDeleteImg(name, sha) {
+  document.getElementById('confirm-title').textContent = '确认删除图片';
+  document.getElementById('confirm-body').textContent = `确定要删除图片 "${name}" 吗？如果有页面正在使用这张图片，删除后该图片将无法显示。`;
+  document.getElementById('confirm-modal').classList.add('show');
+  _deleteCallback = async () => {
+    try {
+      await ghDeleteFile(`images/${name}`, sha, `delete(images): 删除图片 ${name}`);
+      toast('图片已删除', 'success');
+      loadImages();
+    } catch(e) { toast('删除失败: ' + e.message, 'error'); }
+    closeModal();
+  };
+  document.getElementById('confirm-ok').onclick = _deleteCallback;
+}
+
+function closeModal() { document.getElementById('confirm-modal').classList.remove('show'); }
+
+// ============================================================
+// TOAST
+// ============================================================
+let toastTimer;
+function toast(msg, type='success') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show${type==='error'?' error':''}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+if (githubToken) verifyAndLogin();
+</script>
+</body>
+</html>

@@ -63,5 +63,9 @@ Disallow: /
 User-agent: ImagesiftBot
 Disallow: /
 
+# Admin panel - block all bots
+User-agent: *
+Disallow: /admin/
+
 # Yandex Turbo Pages RSS feed
 Sitemap: https://www.chanferpack.com/turbo-ru.xml
