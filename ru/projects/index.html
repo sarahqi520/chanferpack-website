@@ -156,14 +156,14 @@
 </head>
 <body>
   <header class="navbar"><div class="nav-container"><a href="../index.html" class="logo"><img src="../images/logo.svg" alt="CHANFER" height="44" style="height:44px; width:auto;"></a><nav class="nav-menu"><div class="nav-dropdown"><a href="../Решения/index.html" class="nav-link">Решения ▾</a><div class="dropdown-menu"><a href="../Решения/bottle-line.html">🧴 Bottle Line</a><a href="../Решения/pouch-line.html">📦 Pouch Line</a><a href="../Решения/drum-line.html">🛢️ Drum Line</a></div></div><a href="../Отрасли/index.html" class="nav-link">Отрасли</a><a href="../Оборудование/index.html" class="nav-link">Оборудование</a><a href="index.html" class="nav-link">Глобальные проекты</a><a href="../Руководства/index.html" class="nav-link">Руководства</a><a href="../О нас.html" class="nav-link">О нас</a></nav><div class="nav-right">
-        <select class="lang-dropdown" onchange="window.Местоположение.href=this.value" aria-label="Select Language">
-          <option value="../" selected>🌐 EN</option>
+        <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Select Language">
+          <option value="../">🌐 EN</option>
           <option value="../zh/">🌐 中文</option>
           <option value="../es/">🌐 ES</option>
           <option value="../ar/">🌐 AR</option>
           <option value="../pt/">🌐 PT</option>
           <option value="../fr/">🌐 FR</option>
-          <option value="../ru/">🌐 RU</option>
+          <option value="../ru/" selected>🌐 RU</option>
         </select>
       
 <a href="../Контакты.html" class="btn-nav-cta">Получить предложение →</a><button class="hamburger" onclick="toggleMenu()">☰</button></div></div></header>
@@ -294,7 +294,7 @@
     document.querySelectorAll('a[href*="Контакты.html"], .btn-primary[href*="Контакты"], .btn-primary-white[href*="Контакты"]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         gtag('event', 'quote_click', {
-          'page_Местоположение': window.Местоположение.pathname,
+          'page_location': window.location.pathname,
           'link_text': btn.textContent.trim().substring(0, 50)
         });
       });
@@ -304,7 +304,7 @@
     document.querySelectorAll('a[href*="WhatsApp"], a[href*="19128803719"]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         gtag('event', 'WhatsApp_click', {
-          'page_Местоположение': window.Местоположение.pathname
+          'page_location': window.location.pathname
         });
       });
     });
@@ -324,7 +324,7 @@
     document.querySelectorAll('.play-button, .video-play-btn, [aria-label*="video"], [aria-label*="Video"]').forEach(function(btn) {
       btn.addEventListener('click', function(e) {
         gtag('event', 'video_play', {
-          'page_Местоположение': window.Местоположение.pathname
+          'page_location': window.location.pathname
         });
       });
     });
@@ -335,7 +335,7 @@
         var questionText = btn.textContent.trim().substring(0, 100);
         gtag('event', 'Часто задаваемые вопросы_expand', {
           'question': questionText,
-          'page_Местоположение': window.Местоположение.pathname
+          'page_location': window.location.pathname
         });
       });
     });
@@ -345,7 +345,7 @@
       link.addEventListener('click', function(e) {
         gtag('event', 'Телефон_click', {
           'Телефон_number': link.getAttribute('href').replace('tel:', ''),
-          'page_Местоположение': window.Местоположение.pathname
+          'page_location': window.location.pathname
         });
       });
     });
@@ -355,7 +355,7 @@
       link.addEventListener('click', function(e) {
         gtag('event', 'Эл. почта_click', {
           'Эл. почта': link.getAttribute('href').replace('mailto:', ''),
-          'page_Местоположение': window.Местоположение.pathname
+          'page_location': window.location.pathname
         });
       });
     });

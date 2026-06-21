@@ -176,14 +176,14 @@
       <a href="../О нас.html" class="nav-link">О нас</a>
     </nav>
     <div class="nav-right">
-      <select class="lang-dropdown" onchange="window.Местоположение.href=this.value" aria-label="Language">
-        <option value="../index.html" selected>🌐 English</option>
+      <select class="lang-dropdown" onchange="window.location.href=this.value" aria-label="Language">
+        <option value="../index.html">🌐 English</option>
         <option value="../zh/index.html">🇨🇳 中文</option>
         <option value="../es/index.html">🇪🇸 Español</option>
         <option value="../ar/index.html">🇸🇦 العربية</option>
         <option value="../pt/index.html">🇧🇷 Português</option>
         <option value="../fr/index.html">🇫🇷 Français</option>
-                <option value="../ru/">🌐 RU</option>
+                <option value="../ru/" selected>🌐 RU</option>
         </select>
       <a href="../Контакты.html" class="nav-cta">Получить бесплатное предложение</a>
     </div>
@@ -340,7 +340,7 @@
     var t = e.target;
     if (t && t.classList && t.classList.contains('Часто задаваемые вопросы-item')) {
       if (typeof gtag === 'function') {
-        gtag('event', 'Часто задаваемые вопросы_expand', { 'page_Местоположение': Местоположение.pathname, 'question': (t.querySelector('summary') || {}).innerText || '' });
+        gtag('event', 'Часто задаваемые вопросы_expand', { 'page_location': Местоположение.pathname, 'question': (t.querySelector('summary') || {}).innerText || '' });
       }
     }
   }, true);
