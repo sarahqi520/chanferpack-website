@@ -185,6 +185,11 @@ textarea.form-control { resize: vertical; min-height: 80px; }
       <input type="password" id="token-input" class="form-control" placeholder="ghp_xxxxxxxxxxxx" style="margin-bottom:8px">
       <button class="btn btn-primary" style="width:100%" onclick="loginWithToken()">Token 登录</button>
     </div>
+    <div id="file-protocol-warning" style="display:none;margin-top:16px;padding:12px 14px;background:#fff3cd;border-radius:8px;font-size:13px;color:#856404;text-align:left;line-height:1.6;">
+      ⚠️ 当前为本地预览模式，无法访问 GitHub API。<br>
+      请在浏览器中打开：<br>
+      <a href="https://chanferpack.com/admin/" target="_blank" style="color:#1C5A3A;font-weight:600;">https://chanferpack.com/admin/</a>
+    </div>
     <div class="login-note">
       🔒 登录信息仅存于本地浏览器，不经过任何第三方服务器<br>
       需要 GitHub 账号 <strong>sarahqi520</strong> 的权限才可访问
@@ -441,6 +446,16 @@ const SITE_URL   = 'https://www.chanferpack.com';
 // ============================================================
 let githubToken = localStorage.getItem('chanfer_admin_token') || '';
 
+// 检测 file:// 协议，给出引导
+if (location.protocol === 'file:') {
+  document.getElementById('file-protocol-warning').style.display = 'block';
+  // 禁用 Token 登录按钮
+  window.addEventListener('DOMContentLoaded', () => {
+    const btn = document.querySelector('#token-login .btn-primary');
+    if (btn) { btn.disabled = true; btn.title = '请在 chanferpack.com/admin/ 中使用'; }
+  });
+}
+
 function loginWithToken() {
   const t = document.getElementById('token-input').value.trim();
   if (!t) { toast('请输入 Token', 'error'); return; }
@@ -466,8 +481,14 @@ async function verifyAndLogin() {
       loadDashboard();
     }
   } catch(e) {
-    toast('Token 无效或已过期，请重新输入', 'error');
-    localStorage.removeItem('chanfer_admin_token');
+    // 区分 CORS/网络错误 和真正的 Token 失效
+    const isNetworkErr = e instanceof TypeError || (e.message && (e.message.includes('Failed to fetch') || e.message.includes('NetworkError') || e.message.includes('CORS')));
+    if (isNetworkErr) {
+      toast('网络请求失败，请在浏览器中打开 chanferpack.com/admin/ 使用', 'error');
+    } else {
+      toast('Token 无效或已过期，请重新输入', 'error');
+      localStorage.removeItem('chanfer_admin_token');
+    }
   }
 }
 
