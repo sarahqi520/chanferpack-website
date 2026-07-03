@@ -1,0 +1,4 @@
+# Cloudflare Pages redirects for chanferpack.com
+# Force all non-www traffic to www canonical version
+https://chanferpack.com/* https://www.chanferpack.com/:splat 301
+http://chanferpack.com/* https://www.chanferpack.com/:splat 301
