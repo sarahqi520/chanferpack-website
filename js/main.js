@@ -73,6 +73,33 @@ function loadYouTube() {
   cover.style.display = 'none';
 }
 
+// ─── In-Page Language Switcher ───
+// Lets users switch language on the CURRENT page (not jump back to homepage).
+// Maps the current path's language prefix to the target language's equivalent page.
+// Languages with full translated sub-pages switch directly to the same page;
+// others (still being rolled out) fall back to their language homepage.
+var CHANFER_FULL_LANG_PAGES = { en: true, zh: true, es: true, ru: true, ar: false, pt: false, fr: false };
+function switchLang(lang) {
+  if (!lang) return;
+  lang = lang.toLowerCase();
+  var p = window.location.pathname;
+  var prefixes = ['zh', 'es', 'ar', 'pt', 'fr', 'ru'];
+  var base = p;
+  for (var i = 0; i < prefixes.length; i++) {
+    var pre = '/' + prefixes[i] + '/';
+    if (base.indexOf(pre) === 0) { base = '/' + base.substring(pre.length); break; }
+  }
+  if (!CHANFER_FULL_LANG_PAGES[lang]) {
+    window.location.href = (lang === 'en') ? '/' : ('/' + lang + '/');
+    return;
+  }
+  if (base === '/' || base === '') {
+    window.location.href = (lang === 'en') ? '/' : ('/' + lang + '/');
+    return;
+  }
+  window.location.href = (lang === 'en') ? base : ('/' + lang + base);
+}
+
 // ─── WhatsApp Floating Button ───
 (function() {
   const wa = document.createElement('a');
