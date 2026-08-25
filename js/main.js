@@ -78,7 +78,7 @@ function loadYouTube() {
 // Maps the current path's language prefix to the target language's equivalent page.
 // Languages with full translated sub-pages switch directly to the same page;
 // others (still being rolled out) fall back to their language homepage.
-var CHANFER_FULL_LANG_PAGES = { en: true, zh: true, es: true, ru: true, ar: true, pt: false, fr: false };
+var CHANFER_FULL_LANG_PAGES = { en: true, zh: true, es: true, ru: true, ar: true, pt: true, fr: true };
 function switchLang(lang) {
   if (!lang) return;
   lang = lang.toLowerCase();
