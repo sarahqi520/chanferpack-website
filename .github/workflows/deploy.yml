@@ -1,0 +1,75 @@
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-production
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 组装部署目录
+        run: |
+          mkdir -p dist
+          rsync -a \
+            --exclude='.git' \
+            --exclude='.github' \
+            --exclude='dist' \
+            --exclude='README.md' \
+            --exclude='video-script.md' \
+            --exclude='.gitignore' \
+            ./ dist/
+          echo "待部署文件数: $(find dist -type f | wc -l)"
+          echo "总大小: $(du -sh dist | cut -f1)"
+          test -f dist/index.html
+          test -f dist/_headers
+          test -f dist/_redirects
+          test -f dist/404.html
+
+      - name: 部署到 Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
+            echo "::error::缺少 CLOUDFLARE_API_TOKEN secret，请在 Settings → Secrets and variables → Actions 中添加"
+            exit 1
+          fi
+          npx --yes wrangler@3 pages deploy dist \
+            --project-name=chanferpack-website \
+            --branch=main \
+            --commit-dirty=true
+
+      - name: 部署后冒烟检查
+        run: |
+          probe="https://www.chanferpack.com/__ci_probe_$(date +%s)"
+          code=$(curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0" --max-time 30 "$probe")
+          echo "未匹配路径 $probe → HTTP $code"
+          if [ "$code" != "404" ]; then
+            echo "::error::Soft 404 回归：未匹配路径返回 $code（应为 404）"
+            exit 1
+          fi
+          home=$(curl -s -o /dev/null -w "%{http_code}" -A "Mozilla/5.0" --max-time 30 "https://www.chanferpack.com/")
+          echo "首页 → HTTP $home"
+          if [ "$home" != "200" ]; then
+            echo "::error::首页返回 $home"
+            exit 1
+          fi
+          echo "✅ 部署验证通过"
