@@ -2,3 +2,12 @@
 # Force all non-www traffic to www canonical version
 https://chanferpack.com/* https://www.chanferpack.com/:splat 301
 http://chanferpack.com/* https://www.chanferpack.com/:splat 301
+
+# Language directory normalization
+# 同一内容只保留一个 URL，避免 /ru/ 与 /ru/index.html 被重复收录
+/ru/index.html   /ru/   301
+/zh/index.html   /zh/   301
+/es/index.html   /es/   301
+/ar/index.html   /ar/   301
+/pt/index.html   /pt/   301
+/fr/index.html   /fr/   301
