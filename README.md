@@ -96,3 +96,49 @@ chanfer-website/
 - GitHub: https://github.com/sarahqi520
 - 百度云: https://console.bce.baidu.com/
 - Domain: chanferpack.com
+
+
+---
+
+## 🚀 自动部署（GitHub Actions）
+
+> 更新于 2026-10-30
+
+Cloudflare Pages 自带的 GitHub App 集成自 2026-08-29 起不再触发构建，
+现改用 **GitHub Actions + wrangler 直接上传**。
+
+### 工作流
+
+`.github/workflows/deploy.yml`，触发条件：
+
+- 推送到 `main` 分支
+- 手动触发（Actions → Deploy to Cloudflare Pages → Run workflow）
+
+### 执行流程
+
+| 步骤 | 说明 |
+|---|---|
+| 检出代码 | actions/checkout@v4 |
+| 安装 Node | Node 20 |
+| 组装部署目录 | rsync 到 `dist/`，排除 `.git`、`.github`、`README.md`、`video-script.md`、`.gitignore` |
+| 部署 | `wrangler pages deploy dist --project-name=chanferpack-website --branch=main` |
+| 冒烟检查 | 随机路径必须返回 **404**（防 Soft 404 回归），首页必须返回 **200**，否则任务失败 |
+
+### 必需的仓库 Secrets
+
+Settings → Secrets and variables → Actions：
+
+- `CLOUDFLARE_API_TOKEN` → Cloudflare API Token（Account → Cloudflare Pages → Edit）
+- `CLOUDFLARE_ACCOUNT_ID` → `31d381a721527e778df14df6c73e2bfb`
+
+> ⚠️ 仓库为公开仓库，**绝不要把令牌写进工作流文件或提交到代码中**。
+
+### 手动部署（应急）
+
+```bash
+export CLOUDFLARE_API_TOKEN=<token>
+export CLOUDFLARE_ACCOUNT_ID=31d381a721527e778df14df6c73e2bfb
+wrangler pages deploy <站点目录> --project-name=chanferpack-website --branch=main --commit-dirty=true
+```
+
+注意：直接上传会**整体替换**站点，缺失文件会被删除，必须上传完整站点目录。
