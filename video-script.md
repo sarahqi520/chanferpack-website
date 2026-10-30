@@ -57,7 +57,7 @@
 - CHANFER
 - Turnkey Liquid Detergent Packaging Solutions
 - www.gzchanfer.com
-- WhatsApp: +86 19128803719
+- WhatsApp: +86 13060985132
 
 **结束画面**：黑色背景 + 绿色 LOGO + CTA
 
