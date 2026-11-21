@@ -209,7 +209,12 @@
             <p style="font-size:15px;color:var(--gray-500);margin-top:12px">Complete el formulario y le enviaremos una propuesta detallada en 24 horas.</p>
           </div>
 
-          <form class="contact-form" action="#" method="POST">
+          <form class="contact-form" action="https://formsubmit.co/sarah@gzchanfer.com" method="POST">
+            <!-- FormSubmit.co config (2026-11-21) -->
+            <input type="hidden" name="_subject" value="CHANFERPACK New Inquiry">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+
             <div class="form-row">
               <div class="form-group">
                 <label for="name">Nombre Completo *</label>
@@ -468,6 +473,71 @@
     });
   });
   </script>
+
+
+<!-- Inquiry form handler: FormSubmit.co AJAX (added 2026-11-21) -->
+<script>
+(function () {
+  var form = document.querySelector('form[method="POST"]');
+  if (!form) return;
+  var TO = 'sarah@gzchanfer.com';
+  var OK = {
+    en: 'Thank you! Your inquiry has been received. We will reply within 24 hours.',
+    zh: '谢谢！我们已收到您的询盘，将在 24 小时内回复。',
+    ru: 'Спасибо! Ваш запрос получен. Мы ответим в течение 24 часов.',
+    es: '¡Gracias! Hemos recibido su consulta. Le responderemos en 24 horas.',
+    fr: 'Merci ! Votre demande a bien été reçue. Nous répondrons sous 24 heures.',
+    pt: 'Obrigado! Recebemos sua consulta. Responderemos em até 24 horas.',
+    ar: 'شكراً لك! تم استلام طلبك. سنرد خلال 24 ساعة.'
+  };
+  var ERR = {
+    en: 'Could not send automatically. Please email us directly: sales@chanferpack.com',
+    zh: '自动提交失败，请直接邮件联系：sales@chanferpack.com',
+    ru: 'Не удалось отправить автоматически. Напишите нам: sales@chanferpack.com',
+    es: 'No se pudo enviar automáticamente. Escríbanos a: sales@chanferpack.com',
+    fr: 'Envoi automatique impossible. Écrivez-nous à : sales@chanferpack.com',
+    pt: 'Não foi possível enviar automaticamente. Escreva para: sales@chanferpack.com',
+    ar: 'تعذر الإرسال تلقائياً. يرجى مراسلتنا: sales@chanferpack.com'
+  };
+  var lang = (document.documentElement.lang || 'en').toLowerCase().slice(0, 2);
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = form.querySelector('button[type="submit"]');
+    var label = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+    var payload = {};
+    try { new FormData(form).forEach(function (v, k) { if (k.charAt(0) !== '_' || k === '_subject' || k === '_template' || k === '_captcha') payload[k] = v; }); } catch (err) {}
+    payload._subject = 'CHANFERPACK New Inquiry - ' + (payload.company || payload.name || 'Website');
+    payload._template = 'table';
+    payload._captcha = 'false';
+    payload._replyto = payload.email || '';
+    fetch('https://formsubmit.co/ajax/' + TO, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      return r.json().then(function (d) { return { ok: r.ok, d: d }; });
+    }).then(function (x) {
+      if (!x.ok || (x.d && x.d.success === false)) throw new Error('submit failed');
+      form.innerHTML = '<div style="padding:32px 20px;text-align:center;background:#f0fdf6;border:1px solid #bbf7d0;border-radius:12px">'
+        + '<div style="font-size:30px;margin-bottom:12px">✅</div>'
+        + '<p style="font-size:17px;font-weight:600;color:#166534;margin:0 0 8px">' + (OK[lang] || OK.en) + '</p>'
+        + '<p style="font-size:13px;color:#4b5563;margin:0">' + TO + ' · <a href="mailto:sales@chanferpack.com" style="color:var(--primary)">sales@chanferpack.com</a></p></div>';
+      if (typeof gtag === 'function') gtag('event', 'inquiry_submit', { 'page_language': lang });
+    }).catch(function () {
+      if (btn) { btn.disabled = false; btn.textContent = label; }
+      var m = document.getElementById('form-status');
+      if (!m) {
+        m = document.createElement('p');
+        m.id = 'form-status';
+        m.style.cssText = 'color:#c0392b;font-size:14px;text-align:center;margin-top:12px';
+        form.appendChild(m);
+      }
+      m.textContent = ERR[lang] || ERR.en;
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
