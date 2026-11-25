@@ -408,6 +408,101 @@
     </div>
   </section>
 
+  <!-- Production Lines Overview · 5 Full Lines -->
+  <style>
+    .lines-overview-section { padding: 80px 0; background: linear-gradient(180deg, var(--gray-50) 0%, #fff 100%); }
+    .lines-overview-hero { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.08); margin-bottom: 24px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .lines-overview-hero:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(28,90,58,0.15); }
+    .lines-overview-hero-img { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); padding: 24px; display: flex; align-items: center; justify-content: center; aspect-ratio: 4/3; }
+    .lines-overview-hero-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .lines-overview-hero-body { padding: 32px 36px; display: flex; flex-direction: column; justify-content: center; }
+    .lines-overview-hero-body h3 { font-size: 28px; font-weight: 800; margin: 12px 0 14px; color: var(--gray-900); line-height: 1.2; }
+    .lines-overview-hero-body p { font-size: 15px; color: var(--gray-700); margin: 0 0 20px; line-height: 1.65; }
+    .lines-overview-grid-mini { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .lines-overview-mini { display: block; text-decoration: none; color: inherit; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .lines-overview-mini:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(28,90,58,0.12); }
+    .lines-overview-mini-img { background: #f8f9fa; padding: 16px; aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; }
+    .lines-overview-mini-img img { max-width: 100%; max-height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+    .lines-overview-mini-body { padding: 18px 20px; }
+    .lines-overview-mini-body h3 { font-size: 17px; font-weight: 700; margin: 8px 0 6px; color: var(--gray-900); }
+    .lines-overview-mini-body p { font-size: 13px; color: var(--gray-600); margin: 0; line-height: 1.5; }
+    .line-tag { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+    .line-tag-hero { font-size: 12px; padding: 5px 12px; }
+    .line-view { display: inline-block; margin-top: 14px; color: #1C5A3A; font-weight: 700; font-size: 14px; }
+    @media (max-width: 900px) {
+      .lines-overview-hero { grid-template-columns: 1fr; }
+      .lines-overview-hero-img { aspect-ratio: 16/9; }
+      .lines-overview-hero-body { padding: 24px; }
+      .lines-overview-hero-body h3 { font-size: 22px; }
+    }
+    @media (max-width: 560px) {
+      .lines-overview-grid-mini { grid-template-columns: 1fr; }
+    }
+    </style>
+  <section class="lines-overview-section">
+    <div class="container">
+      <div class="section-header" style="text-align:center;margin-bottom:48px;">
+        <span class="section-tag">完整生产线</span>
+        <h2 class="section-title">5条交钥匙包装生产线，一站式制造</h2>
+        <p class="section-subtitle">从自立袋到30L工业桶，CHANFER 为各种形态的液体洗涤剂提供完整的交钥匙包装生产线。</p>
+      </div>
+
+      <!-- Hero Card: Bottle Line -->
+      <a href="/zh/solutions/bottle-line.html" class="lines-overview-hero">
+        <div class="lines-overview-hero-img"><img src="/images/bottle-detergent-line.jpg" alt="Bottle Detergent Packaging Line" loading="lazy"></div>
+        <div class="lines-overview-hero-body">
+          <span class="line-tag line-tag-hero" style="background:#1C5A3A;color:#fff;">★ #1 最受欢迎</span>
+          <h3>瓶装洗涤剂包装线</h3>
+          <p>适用于液体洗涤剂、洗洁精和洗衣产品的交钥匙瓶装线。完整流程：理瓶 → 伺服灌装 → 旋盖 → 贴标 → 喷码 → 装箱 → 机器人码垛。产能 2,000–8,000 瓶/小时。</p>
+          <span class="line-view">查看方案 →</span>
+        </div>
+      </a>
+
+      <!-- 2x2 Mini Grid -->
+      <div class="lines-overview-grid-mini">
+        <a href="/zh/solutions/pouch-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img"><img src="/images/stand-up-pouch-line.jpg" alt="pouch-line" loading="lazy"></div>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#FFC83C;color:#1C5A3A;">环保</span>
+            <h3>自立袋生产线</h3>
+            <p>1,500–6,000 袋/小时 · 相比硬质瓶节省 40–60% 材料成本。</p>
+            <span class="line-view" style="font-size:13px;">查看方案 →</span>
+          </div>
+        </a>
+        <a href="/zh/solutions/spout-pouch-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img"><img src="/images/spout-pouch-line.jpg" alt="spout-pouch-line" loading="lazy"></div>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#FF6B35;color:#fff;">增长市场</span>
+            <h3>吸嘴袋生产线</h3>
+            <p>吸嘴插入 + 液体灌装 + 热封，适用于补充装洗涤剂。</p>
+            <span class="line-view" style="font-size:13px;">查看方案 →</span>
+          </div>
+        </a>
+        <a href="/zh/solutions/refill-pack-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img"><img src="/images/refill-pack-line.jpg" alt="refill-pack-line" loading="lazy"></div>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#4CAF50;color:#fff;">成本最低</span>
+            <h3>补充装生产线</h3>
+            <p>制袋灌封技术 · 相比硬质瓶减少 60% 塑料用量。</p>
+            <span class="line-view" style="font-size:13px;">查看方案 →</span>
+          </div>
+        </a>
+        <a href="/zh/solutions/drum-line.html" class="lines-overview-mini">
+          <div class="lines-overview-mini-img"><img src="/images/drum-detergent-line.jpg" alt="drum-line" loading="lazy"></div>
+          <div class="lines-overview-mini-body">
+            <span class="line-tag" style="background:#5C6BC0;color:#fff;">工业级</span>
+            <h3>桶装洗涤剂生产线</h3>
+            <p>5L–30L 工业桶 · 带码垛自动化的 B2B 生产。</p>
+            <span class="line-view" style="font-size:13px;">查看方案 →</span>
+          </div>
+        </a>
+      </div>
+
+      <div style="text-align:center;margin-top:48px;">
+        <a href="/zh/solutions/index.html" class="btn-primary">查看全部解决方案 →</a>
+      </div>
+    </div>
+  </section>
   <!-- Full Line Process Section -->
   <section class="process-section">
     <div class="container">
