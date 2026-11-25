@@ -2005,4 +2005,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.chanferpack.com/tools/roi-calculator.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.chanferpack.com/tools/roi-calculator.html"/>
   </url>
+  <url>
+    <loc>https://www.chanferpack.com/markets/africa.html</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.chanferpack.com/markets/africa.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.chanferpack.com/markets/africa.html"/>
+  </url>
+  <url>
+    <loc>https://www.chanferpack.com/markets/europe.html</loc>
+    <lastmod>2026-11-25</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.chanferpack.com/markets/europe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.chanferpack.com/markets/europe.html"/>
+  </url>
 </urlset>
